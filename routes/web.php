@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Admin\PostingController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::prefix('admin')->group(function() {
+    Route::get('/', [HomeAdminController::class, 'index']);
+
+    // posting
+    Route::prefix('posting')->group(function() {
+        Route::get('/', [PostingController::class, 'index']);
+        Route::post('/create', [PostingController::class, 'create']);
+    });
+});

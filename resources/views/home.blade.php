@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="maps-wrapper">
-        <iframe class="maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63417.59056579607!2d106.56034514084342!3d-6.5721354008838215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69d91ff08cb2f7%3A0xfa01eb4292bcc8e0!2sLeuwisadeng%2C%20Bogor%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1636986640473!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe class="maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63417.30488545914!2d106.54798278643163!3d-6.574375282733329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69d91ff08cb2f7%3A0x80be652481c1ef63!2sLeuwisadeng%2C%20Bogor%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1568799470042!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         <div class="search">
             <input type="text" name="keyword" placeholder="Cari desa .." autocomplete="off" autofocus>
         </div>
@@ -30,6 +30,22 @@
                 <small>Drs. Rudy Mulyana</small>
             </div>
         </div>
+        <div class="part-berita">
+            <div class="card shadow rounded">
+                <a href="">
+                <div class="card-body" style="position: relative;">
+                    <img src="{{ asset('img/sample.jpg') }}" alt="gambar berita" style="width: 100%">
+                </div>
+                <div class="card-footer d-flex flex-column bg-white">
+                    <span class="text-success">Nama berita</span>
+                    <small class="text-success mt-3">
+                        <i class="fas fa-calendar-check"></i> 
+                        22 September 2021
+                    </small>
+                </div>
+                </a>
+            </div>
+        </div>
     </div>
 @endsection
 @section('scripts')
@@ -38,18 +54,13 @@
             // function live search desa
             (function searchDesa() {
                 $('input[name=keyword]').keydown(function() {
-                    var key = $(this).val();
+                    var key = $(this).val().toLowerCase();
                     $('.desa').each(function() {
-                        if($(this).text().toLowerCase().includes(key.toLowerCase())) {
-                            $(this).closest('li').show();
-                        }else{
-                            $(this).closest('li').hide();
-                        }
+                        var text = $(this).text().toLowerCase();
+                        text.includes(key) ? $(this).closest('li').show() : $(this).closest('li').hide();
                     });
                 });
             })();
-
-
         });
     </script>
 @endsection

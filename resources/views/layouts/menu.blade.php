@@ -80,6 +80,3 @@
         </ul>
     </div>
 </div>
-<script>
-    
-</script>
