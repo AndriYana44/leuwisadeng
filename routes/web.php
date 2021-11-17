@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\PostingController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,14 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Auth::routes();
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [HomeAdminController::class, 'index']);
+    Route::prefix('admin')->group(function() {
+        Route::get('/', [HomeAdminController::class, 'index']);
 
-Route::prefix('admin')->group(function() {
-    Route::get('/', [HomeAdminController::class, 'index']);
-
-    // posting
-    Route::prefix('posting')->group(function() {
-        Route::get('/', [PostingController::class, 'index']);
-        Route::post('/create', [PostingController::class, 'create']);
+        // posting
+        Route::prefix('posting')->group(function() {
+            Route::get('/', [PostingController::class, 'index']);
+            Route::post('/create', [PostingController::class, 'create']);
+        });
     });
 });
+
+Route::get('/', [HomeController::class, 'index']);

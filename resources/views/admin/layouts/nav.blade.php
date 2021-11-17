@@ -21,7 +21,10 @@
             <div class="link-wrapper">
               <a class="dropdown-link" href="#"><i class="fa fa-user"></i>&nbsp; Profile</a>
               <a class="dropdown-link" href="#"><i class="fa fa-cog"></i>&nbsp; Pengaturan</a>
-              <a class="dropdown-link" href="#"><i class="fa fa-arrow-right"></i>&nbsp; Logout</a>
+              <form action="{{ route('logout') }}" method="POST" class="mt-4">
+                @csrf
+                <button class="dropdown-link btn btn-danger btn-sm">Logout</button>
+              </form>
             </div>
           </div>
         </div>
