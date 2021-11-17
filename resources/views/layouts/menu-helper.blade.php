@@ -1,6 +1,7 @@
 <div class="navbar-helper">
     <div class="nav-menu">
         <ul class="menu-wrapper">
+            <li><a href=""><i class="fa fa-home"></i></a></li>
             <li>
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,7 +43,6 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="">BERANDA</a></li>
             <li>
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

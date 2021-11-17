@@ -40,7 +40,7 @@
 <div class="hierarki">
     <div class="container">
         <h3 style="color: #555">Penggunaan IT Madurasa</h3>
-        <small style="color: #555">Beranda / Penggunaan IT Madurasa</small>
+        <small style="color: #999">Beranda / Penggunaan IT Madurasa</small>
     </div>
 </div>
 <div class="container mt-4">

@@ -49,7 +49,6 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="">BERANDA</a></li>
             <li>
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
