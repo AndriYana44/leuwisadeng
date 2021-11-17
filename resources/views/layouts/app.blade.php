@@ -25,8 +25,41 @@
             $('.navbar-helper').css('height', '0');
             $('.navbar-helper').css('overflow', 'hidden');
         }
+
     });
+
+    function convertDate(date = `${new Date().getDate()}-${new Date().getMonth()+1}-${new Date().getFullYear()}`) {
+        date = date.split('-');
+        let month = date[1];
+            if(month == 1)
+                res = 'Januari';
+            else if(month == 2)
+                res = 'Februari';
+            else if(month == 3)
+                res = 'Maret';
+            else if(month == 4)
+                res = 'April';
+            else if(month == 5)
+                res = 'Mei';
+            else if(month == 6)
+                res = 'Juni';
+            else if(month == 7)
+                res = 'Juli';
+            else if(month == 8)
+                res = 'Agustus';
+            else if(month == 9)
+                res = 'September';
+            else if(month == 10)
+                res = 'Oktober';
+            else if(month == 11)
+                res = 'November';
+            else 
+                res = 'Desember';
+        result = `${date[0]} ${res} ${date[2]}`;
+        return result;
+    }
 </script>
+@include('layouts.footer')
 @yield('scripts')
 </body>
 </html>

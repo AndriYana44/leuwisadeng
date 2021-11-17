@@ -25,13 +25,17 @@
                         <div class="card shadow rounded">
                             <div class="card-header">
                                 <span>Pengelolaan data posting</span>
-                                <form action="{{ url('') }}/admin/posting/create" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="float-right btn btn-success btn-sm">
-                                        <i class="fa fa-plus"></i> Tambah
-                                    </button>
-                                </form>
+                                <a type="submit" href="{{ url('admin/posting/create') }}" class="float-right btn btn-success btn-sm">
+                                    <i class="fa fa-plus"></i> Tambah
+                                </a>
                             </div>
+
+                            @if ($message = Session::has('success'))
+                                <div class="alert alert-info" role="alert">
+                                    {{ $message }}
+                                </div>
+                            @endif
+
                             <div class="card-body">
                                 <table id="table-posting" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
@@ -46,15 +50,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Bogor Timur</td>
-                                            <td>Bogor</td>
-                                            <td>Bogor</td>
-                                            <td>Bogor</td>
-                                            <td>Bogor</td>
-                                            <td>Bogor</td>
-                                        </tr>
+                                        @foreach ($data as $item)
+                                            <tr>
+                                                <td>{{ $item->judul }}</td>
+                                                <td>{{ $item->kategori }}</td>
+                                                <td>{{ $item->tanggal }}</td>
+                                                <td>
+                                                    <img src='{{ asset("file_upload/$item->image") }}' style="width: 80px; height: 80px;">
+                                                </td>
+                                                <td>{{ $item->created_at }}</td>
+                                                <td>{{ $item->updated_at }}</td>
+                                                <td>
+                                                    <form action="{{ url('') }}/admin/posting/edit/{{ $item->id }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                                                    </form>
+                                                    <form action="{{ url('') }}/admin/posting/delete/{{ $item->id }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" onclick="return confirm('Lanjukan menghapus data?')" class="btn btn-danger btn-sm">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

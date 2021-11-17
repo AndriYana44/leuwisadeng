@@ -1,8 +1,10 @@
 
 <div class="navbar">
     <div class="nav-brand">
-        <img src="{{ asset('img/logo-kab-bogor.png') }}" alt="logo" width="100">
-        <h6>KECAMATAN LEUWISADENG <br> KABUPATEN BOGOR</h6>
+        <a href="{{ url('/') }}" style="display: flex; align-items:center; text-decoration:none; color:#555;">
+            <img src="{{ asset('img/logo-kab-bogor.png') }}" alt="logo" width="100">
+            <h6>KECAMATAN LEUWISADENG <br> KABUPATEN BOGOR</h6>
+        </a>
     </div>
     <div class="nav-menu">
         <ul class="menu-wrapper">
@@ -12,7 +14,7 @@
                         INV#1
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Penggunaan IT Madurasa</a></li>
+                        <li><a class="dropdown-item" href="{{ url('inv1/penggunaan-it') }}">Penggunaan IT Madurasa</a></li>
                         <li><a class="dropdown-item" href="#">Hadiah Prosedur/Layanan Inovasi Madurasa</a></li>
                         <li><a class="dropdown-item" href="#">Manual Book Inovasi Madurasa</a></li>
                         <li><a class="dropdown-item" href="#">Informasi Layanan Madurasa</a></li>

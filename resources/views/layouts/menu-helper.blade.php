@@ -7,7 +7,7 @@
                         INV#1
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Penggunaan IT Madurasa</a></li>
+                        <li><a class="dropdown-item" href="{{ url('inv1/penggunaan-it') }}">Penggunaan IT Madurasa</a></li>
                         <li><a class="dropdown-item" href="#">Hadiah Prosedur/Layanan Inovasi Madurasa</a></li>
                         <li><a class="dropdown-item" href="#">Manual Book Inovasi Madurasa</a></li>
                         <li><a class="dropdown-item" href="#">Informasi Layanan Madurasa</a></li>

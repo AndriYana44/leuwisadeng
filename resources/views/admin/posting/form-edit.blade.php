@@ -1,5 +1,38 @@
 @extends('admin.layouts.app')
 @section('content')
+
+    <style>
+        .img-wrapper {
+            border-radius: 8px;
+            position: relative;
+            height: 230px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .img-wrapper .input-group {
+            /* position: absolute;
+            bottom: 20px;
+            width: 90%; */
+        }
+        .img-wrapper img {
+            /* margin-bottom: 10px;
+            position: absolute;
+            top: 10px;
+            
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 8px; */
+            margin-left: 20px;
+            width: 150px; 
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        .img-wrapper .name_file {
+            margin: 5px 0 15px 20px;
+        }
+    </style>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -23,11 +56,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ url('') }}/admin/posting/store" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('') }}/admin/posting/update/{{ $data->id }}" method="POST" enctype="multipart/form-data" class="form-posting">
                             @csrf
+                            @method('patch')
                             <div class="card shadow rounded pb-4">
                                 <div class="card-header">
-                                    <span>Tambah data posting</span>
+                                    <span>Edit data posting</span>
                                 </div>
                                 <div class="card-body">
                                     <table style="width: 80%">
@@ -40,7 +74,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" placeholder="masukan judul posting">
+                                                        <input type="text" value="{{ $data->judul }}" class="form-control @error('judul') is-invalid @enderror" name="judul" placeholder="masukan judul posting">
                                                     </div>
                                                     @error('judul')
                                                         <small class="text-danger">{{ $message }}</small>
@@ -57,7 +91,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="masukan kategori">
+                                                        <input type="text" value="{{ $data->kategori }}" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="masukan kategori">
                                                     </div>
                                                     @error('kategori')
                                                         <small class="text-danger">{{ $message }}</small>
@@ -77,7 +111,7 @@
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <i class="fa fa-calendar-check"></i>
                                                         </span>
-                                                        <input type="text" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="tanggal" id="tanggal">
+                                                        <input type="text" value="{{ $data->tanggal }}" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="tanggal" id="tanggal">
                                                     </div>
                                                     @error('tanggal')
                                                         <small class="text-danger">{{ $message }}</small>
@@ -92,10 +126,13 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="form-group">
+                                                <div class="form-group img-wrapper">
+                                                    <img alt="image" src="{{ asset("file_upload/$data->image") }}" id="showImage" class="shadow rounded">
+                                                   
                                                     <div class="input-group">
-                                                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                                        <input type="file" onchange="readURL(event)" class="form-control @error('image') is-invalid @enderror" name="image">
                                                     </div>
+                                                    <small class="text-danger validate_size" hidden>Ukuran file terlalu besar. (max: 1.5MB)</small>
                                                     @error('image')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
@@ -111,7 +148,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <textarea name="konten" id="konten" style="width: 100%"></textarea>
+                                                        <textarea name="konten" id="konten" style="width: 100%">{!! $data->konten !!}</textarea>
                                                     </div>
                                                     @error('konten')
                                                         <small class="text-danger">{{ $message }}</small>
@@ -128,7 +165,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input name="kata_kunci" id="kata_kunci" class="form-control @error('kata_kunci') is-invalid @enderror" placeholder="masukan kata kunci">
+                                                        <input name="kata_kunci" value="{{ $data->kata_kunci }}" id="kata_kunci" class="form-control @error('kata_kunci') is-invalid @enderror" placeholder="masukan kata kunci">
                                                     </div>
                                                     @error('kata_kunci')
                                                         <small class="text-danger">{{ $message }}</small>
@@ -145,7 +182,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="masukan deskripsi">
+                                                        <input name="deskripsi" value="{{ $data->deskripsi }}" id="deskripsi" class="form-control" placeholder="masukan deskripsi">
                                                     </div>
                                                     @error('deskripsi')
                                                         <small class="text-danger">{{ $message }}</small>
@@ -163,6 +200,9 @@
                                                     <button type="reset" class="btn btn-warning float-right mr-2">
                                                         <i class="fa fa-spinner"></i> Reset
                                                     </button>
+                                                    <button type="button" class="btn btn-danger float-right mr-2 cancel">
+                                                        <i class="fa fa-cancel"></i> Cancel
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -179,15 +219,39 @@
 @section('scripts')
     <script>
         $(function() {
-            (function setDateValue() {
-                const date = new Date();
-                console.log(date.getDate())
-                $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-            })();
-            
             $('#tanggal').datepicker();
             CKEDITOR.replace('konten');
 
+            $('.cancel').click(() => {
+                window.history.back();
+            });
+
+            (function submitForm() {
+                $('.form-posting').submit(function(e) {
+                    var image_size = $('input[type=file]')[0].files[0].size;
+                    var image_name = $('input[type=file]')[0].files[0].name;
+                    var ext_allowed = ['jpg', 'jpeg', 'png'];
+                    var ext = image_name.split('.');
+                    var len = ext.length;
+
+                    if(image_size > 1500000) {
+                        e.preventDefault();
+                        $('.validate_size').removeAttr('hidden');
+                        $('input[type=file]').addClass('is-invalid');
+                    }
+
+                    if(!ext_allowed.includes(ext[len-1])) {
+                        e.preventDefault();
+                        $('.validate_size').html('yang anda upload bukan gambar!');
+                        $('.validate_size').removeAttr('hidden');
+                    }
+                });
+            })()
         });
+
+        const readURL = function(event) {
+            const img = document.getElementById("showImage");
+            img.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 @endsection

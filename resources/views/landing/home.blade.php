@@ -19,11 +19,18 @@
         </div>
     </div>
     <div class="content-wrapper">
+        <style>
+            .btn-selengkapnya:hover {
+                box-shadow: 0 1px 5px rgba(0, 0, 0, .3);
+            }
+        </style>
         <div class="berita bg-success pt-5">
-            <h4>Berita Terkini</h4> 
-            <h5>Kecamatan Leuwisadeng</h5>
-            <small>Dapatkan berita & informasi resmi terupdate dan terpercaya seputar Kecamatan Kecamatan Leuwisadeng</small><br>
-            <a href="" class="btn btn-sm text-white mt-3" style="background-color: #146c43">Selengkapnya</a>
+            <div class="berita-wrapper">
+                <h4>Berita Terkini</h4> 
+                <h5>Kecamatan Leuwisadeng</h5>
+                <small>Dapatkan berita & informasi resmi terupdate dan terpercaya seputar Kecamatan Kecamatan Leuwisadeng</small><br>
+                <a href="" class="btn btn-sm text-white mt-3 btn-selengkapnya" style="background-color: #146c43">Selengkapnya</a>
+            </div>
             <div class="pimpinan mt-5">
                 <span class="mb-3">Pimpinan</span>
                 <img src="{{ asset('img/pimpinan.jpeg') }}" alt="pimpinan" width="250">
@@ -31,20 +38,31 @@
             </div>
         </div>
         <div class="part-berita">
-            <div class="card shadow rounded">
-                <a href="">
-                <div class="card-body" style="position: relative;">
-                    <img src="{{ asset('img/sample.jpg') }}" alt="gambar berita" style="width: 100%">
+            @foreach ($data as $item)
+                @php
+                    $date = $item->tanggal;
+                    $pecah = explode('-', $date);
+                    $monthNum  = $pecah[1];
+                    $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                    $monthName = $dateObj->format('F');
+
+                    $fullDate = $pecah[0] . ' ' . $monthName . ' ' . $pecah[2];
+                @endphp
+                <div class="card card-berita">
+                    <a href="">
+                    <div class="card-body" style="position: relative; display: flex; justify-content: center; align-items: center;">
+                        <img src="{{ asset("file_upload/$item->image") }}" alt="gambar berita" style="width: 100%; height: 250px;">
+                        <div class="judul">
+                            <span>{{ $item->judul }}</span>
+                            <small class="text-success mt-3">
+                                <i class="fas fa-calendar-check"></i> &nbsp; 
+                                {{ $fullDate }}
+                            </small>
+                        </div>
+                    </div>
+                    </a>
                 </div>
-                <div class="card-footer d-flex flex-column bg-white">
-                    <span class="text-success">Nama berita</span>
-                    <small class="text-success mt-3">
-                        <i class="fas fa-calendar-check"></i> 
-                        22 September 2021
-                    </small>
-                </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection

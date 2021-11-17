@@ -74,6 +74,12 @@
             }
         });
 
+        (function flashAlert() {
+          setTimeout(() => {
+            $('.alert').slideUp();
+          }, 3000);
+        })();
+
         CKEDITOR.config.width = '100%';
         CKEDITOR.config.scayt_autoStartup = false;
     });

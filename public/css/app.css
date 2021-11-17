@@ -129,8 +129,11 @@ body {
 .berita {
     position: relative;
     width: 30%;
-    padding: 20px 10px 15px 40px;
+    padding: 20px 40px 15px 40px;
     color: #FFF;
+}
+.berita .berita-wrapper {
+    padding: 15px;
 }
 .pimpinan {
     display: flex;
@@ -144,24 +147,50 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-.part-berita .card {
+.part-berita .card-berita {
     width: 300px;
-    height: 300px;
+    height: 250px;
     margin: 20px;
     padding: 0;
     border: none;
     transition: .3s;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
-.part-berita .card:hover {
-    margin-top: 23px;
-    margin-left: 23px;
+.part-berita .card-berita:hover {
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
-.part-berita .card .card-body {
+.part-berita .card-berita .card-body {
     position: absolute;
     padding: 0;
     margin: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255);
 }
-.part-berita .card a {
+.part-berita .card-berita a {
     text-decoration: none;
+}
+.part-berita .card-berita .card-body .judul {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    width: 100%;
+    padding: 10px;
+    bottom: -35px;
+    border: 1px solid rgba(105, 65, 65, 0.1);
+    border-top: none;
+}
+.part-berita .card .card-body .judul span {
+    font-size: 16px;
+    color: #555;
+}
+.part-berita .card .card-body .judul small {
+    font-size: 12px;
+}
+.part-berita .card .card-footer {
+    height: 80px;
 }
