@@ -222,10 +222,6 @@
             $('#tanggal').datepicker();
             CKEDITOR.replace('konten');
 
-            $('.cancel').click(() => {
-                window.history.back();
-            });
-
             (function submitForm() {
                 $('.form-posting').submit(function(e) {
                     var image_size = $('input[type=file]')[0].files[0].size;

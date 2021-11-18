@@ -7,14 +7,14 @@
         </div>
         <div class="desa-wrapper">
             <ul>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Wangun Jaya</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Leuwisadeng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Sibanteng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Kalong Satu</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Sadeng Kolot</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Babakan Sadeng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Sadeng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> Desa Kalong Dua</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Wangun Jaya</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Leuwisadeng</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Sibanteng</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Kalong Satu</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Sadeng Kolot</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Babakan Sadeng</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Sadeng</a></li>
+                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Kalong Dua</a></li>
             </ul>
         </div>
     </div>

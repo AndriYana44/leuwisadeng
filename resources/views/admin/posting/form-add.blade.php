@@ -29,8 +29,8 @@
                                 <div class="card-header">
                                     <span>Tambah data posting</span>
                                 </div>
-                                <div class="card-body">
-                                    <table style="width: 80%">
+                                <div class="card-body text-center" style="display: flex; justify-content:center; align-items: center;">
+                                    <table style="width: 80%;">
                                         <tr>
                                             <td class="lable">
                                                 <div class="form-group mb-3">
@@ -111,7 +111,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <textarea name="konten" id="konten" style="width: 100%"></textarea>
+                                                        <textarea name="konten" id="konten" cols="30" rows="10"></textarea>                                                    
                                                     </div>
                                                     @error('konten')
                                                         <small class="text-danger">{{ $message }}</small>
@@ -163,6 +163,9 @@
                                                     <button type="reset" class="btn btn-warning float-right mr-2">
                                                         <i class="fa fa-spinner"></i> Reset
                                                     </button>
+                                                    <button type="button" class="btn btn-danger float-right mr-2 cancel">
+                                                        <i class="fa fa-times"></i> Cancel
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -178,16 +181,15 @@
 @endsection
 @section('scripts')
     <script>
+        CKEDITOR.replace('konten');
+
         $(function() {
+            $('#tanggal').datepicker();
             (function setDateValue() {
                 const date = new Date();
-                console.log(date.getDate())
                 $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
             })();
             
-            $('#tanggal').datepicker();
-            CKEDITOR.replace('konten');
-
         });
     </script>
 @endsection
