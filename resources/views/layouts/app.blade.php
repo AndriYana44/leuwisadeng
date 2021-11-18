@@ -14,43 +14,6 @@
     @include('layouts.menu-helper')
     @include('layouts.menu')
     @yield('content')
-    <style>
-        #button {
-      display: flex;
-      background-color: #1e7528;
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      border-radius: 4px;
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      transition: background-color .3s, 
-        opacity .5s, visibility .5s;
-      opacity: 0;
-      visibility: hidden;
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      color: #FFF;
-      font-size: 22px;
-      transition: .3s;
-    }
-    #button:hover {
-      cursor: pointer;
-      background-color: #333;
-      color: #FF9800;
-      margin-bottom: 3px;
-    }
-    #button:active {
-      background-color: #555;
-    }
-    #button.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    </style>
     <a id="button">
         <i class="fa fa-angle-double-up"></i>
     </a>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HalamanController;
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\PostingController;
 use App\Http\Controllers\Auth\LoginController;
@@ -40,6 +41,16 @@ Route::middleware(['auth'])->group(function () {
 
             // method patch
             Route::patch('/update/{id}', [PostingController::class, 'update']);
+        });
+
+        // halaman
+        Route::prefix('halaman')->group(function() {
+            // method get
+            Route::get('/', [HalamanController::class, 'index']);
+            Route::get('/create', [HalamanController::class, 'create']);
+
+            // method post
+            Route::post('/store', [HalamanController::class, 'store']);
         });
     });
 });

@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ url('') }}/admin/posting/store" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('') }}/admin/posting/store" method="POST" class="form-posting" enctype="multipart/form-data">
                             @csrf
                             <div class="card shadow rounded pb-4">
                                 <div class="card-header">
@@ -43,7 +43,7 @@
                                                         <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" placeholder="masukan judul posting">
                                                     </div>
                                                     @error('judul')
-                                                        <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -60,7 +60,7 @@
                                                         <input type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="masukan kategori">
                                                     </div>
                                                     @error('kategori')
-                                                        <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -80,7 +80,7 @@
                                                         <input type="text" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="tanggal" id="tanggal">
                                                     </div>
                                                     @error('tanggal')
-                                                        <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -96,8 +96,9 @@
                                                     <div class="input-group">
                                                         <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
                                                     </div>
+                                                    <small class="text-danger float-left mb-3 validate_size" hidden>Ukuran file terlalu besar. (max: 1.5MB)</small>
                                                     @error('image')
-                                                        <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -114,7 +115,7 @@
                                                         <textarea name="konten" id="konten" cols="30" rows="10"></textarea>                                                    
                                                     </div>
                                                     @error('konten')
-                                                        <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -131,7 +132,7 @@
                                                         <input name="kata_kunci" id="kata_kunci" class="form-control @error('kata_kunci') is-invalid @enderror" placeholder="masukan kata kunci">
                                                     </div>
                                                     @error('kata_kunci')
-                                                        <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -148,7 +149,7 @@
                                                         <input name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="masukan deskripsi">
                                                     </div>
                                                     @error('deskripsi')
-                                                        <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -190,6 +191,27 @@
                 $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
             })();
             
+            (function submitForm() {
+                $('.form-posting').submit(function(e) {
+                    var image_size = $('input[type=file]')[0].files[0].size;
+                    var image_name = $('input[type=file]')[0].files[0].name;
+                    var ext_allowed = ['jpg', 'jpeg', 'png'];
+                    var ext = image_name.split('.');
+                    var len = ext.length;
+
+                    if(image_size > 1500000) {
+                        e.preventDefault();
+                        $('.validate_size').removeAttr('hidden');
+                        $('input[type=file]').addClass('is-invalid');
+                    }
+
+                    if(!ext_allowed.includes(ext[len-1])) {
+                        e.preventDefault();
+                        $('.validate_size').html('yang anda upload bukan gambar!');
+                        $('.validate_size').removeAttr('hidden');
+                    }
+                });
+            })();
         });
     </script>
 @endsection
