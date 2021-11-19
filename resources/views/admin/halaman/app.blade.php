@@ -40,21 +40,31 @@
                                 <table id="table-halaman" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Judul</th>
-                                            <th>Kategori</th>
-                                            <th>Tanggal</th>
-                                            <th>Gambar</th>
+                                            <th>Judul Halaman</th>
+                                            <th>Tanggal dibuat</th>
+                                            <th>Tanggal update</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($data as $item) --}}
+                                        @foreach ($data as $item)
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $item->judul }}</td>
+                                                <td>{{ $item->created_at }}</td>
+                                                <td>{{ $item->updated_at }}</td>
+                                                <td>
+                                                    <form action="{{ url('') }}/admin/halaman/delete/{{ $item->id }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Lanjutkan menghapus file?')">Hapus</button>                                                        
+                                                    </form>
+                                                    <form action="{{ url('') }}/admin/halaman/edit/{{ $item->id }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        <button class="btn btn-warning btn-sm" type="submit">Edit</button>
+                                                    </form>
+                                                </td>
                                             </tr>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

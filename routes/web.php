@@ -48,12 +48,22 @@ Route::middleware(['auth'])->group(function () {
             // method get
             Route::get('/', [HalamanController::class, 'index']);
             Route::get('/create', [HalamanController::class, 'create']);
+            Route::get('/download/{id}', [HalamanController::class, 'getLampiran']);
 
             // method post
             Route::post('/store', [HalamanController::class, 'store']);
+            Route::post('/edit/{id}', [HalamanController::class, 'edit']);
+
+            // method patch
+            Route::patch('/update/{id}', [HalamanController::class, 'update']);
+
+            // method delete
+            Route::delete('/delete/{id}', [HalamanController::class, 'destroy']);
         });
     });
 });
+
+Route::post('/editor/upload-konten', [HalamanController::class, 'uploadKonten'])->name('upload');
 
 Route::get('/', [HomeController::class, 'index']);
 Route::prefix('inv1')->group(function() {

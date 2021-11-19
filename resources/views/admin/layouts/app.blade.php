@@ -18,8 +18,6 @@
   {{-- dataTables --}}
   <link rel="stylesheet" href="{{ asset('css/admin/dataTables.bootstrap4.css') }}">
   <link rel="stylesheet" href="{{ asset('jquery-ui/jquery-ui.css') }}">
-
-  <link rel="stylesheet" href="{{ asset('css/admin/ckeditor.css') }}">
 </head>
 <!--
 `body` tag options:
@@ -54,7 +52,9 @@
 <script src="{{ asset('adminLTE/dist/js/adminlte.js') }}"></script>
 
 {{-- ckeditor --}}
-<script src="{{ asset('ckeditor-standard/content/Scripts/ckeditor/ckeditor.js') }}"></script>
+{{-- <script src="{{ asset('ckeditor-standard/content/Scripts/ckeditor/ckeditor.js') }}"></script> --}}
+{{-- <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script> --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{ asset('adminLTE/plugins/chart.js/Chart.min.js') }}"></script>
@@ -85,8 +85,6 @@
         $('.cancel').click(() => {
           window.history.back();
         });
-
-        CKEDITOR.config.width = '100%';
     });
 </script>
 @yield('scripts')
