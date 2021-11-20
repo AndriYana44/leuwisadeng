@@ -50,6 +50,10 @@ class PostingController extends Controller
             $fix_date = $fix_date[2] . '-' . $fix_date[0] . '-' . $fix_date[1];
         }
 
+        $lowerJudul = strtolower($request->judul);
+        $slug = explode(' ', $lowerJudul);
+        $slug = implode('-', $slug);
+
         $posting = new Posting();
         $posting->judul = $request->judul;
         $posting->kategori = $request->kategori;
@@ -58,6 +62,7 @@ class PostingController extends Controller
         $posting->konten = $request->konten;
         $posting->kata_kunci = $request->kata_kunci;
         $posting->deskripsi = $request->deskripsi;
+        $posting->slug = $slug;
         $posting->save();
         
         return redirect('/admin/posting')->with([
@@ -98,12 +103,17 @@ class PostingController extends Controller
             $fix_date = $fix_date[2] . '-' . $fix_date[0] . '-' . $fix_date[1];
         }
 
+        $lowerJudul = strtolower($request->judul);
+        $slug = explode(' ', $lowerJudul);
+        $slug = implode('-', $slug);
+
         $data_edit->judul = $request->judul;
         $data_edit->kategori = $request->kategori;
         $data_edit->tanggal = is_array($fix_date) ? $request->tanggal : $fix_date;
         $data_edit->konten = $request->konten;
         $data_edit->kata_kunci = $request->kata_kunci;
         $data_edit->deskripsi = $request->deskripsi;
+        $data_edit->slug = $slug;
         if(isset($file_name)) {
             $data_edit->image = $file_name;
         }

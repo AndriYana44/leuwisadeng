@@ -84,6 +84,11 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/editor/upload-konten', [HalamanController::class, 'uploadKonten'])->name('upload');
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::prefix('posting')->group(function() {
+    Route::get('/{slug}', [HomeController::class, 'getPosting']);
+});
+
 Route::prefix('inv1')->group(function() {
     Route::get('/penggunaan-it', [Inv1Controller::class, 'penggunaanIT']);
     Route::get('/penggunaan-it/download', [Inv1Controller::class, 'getDocPenggunaanIT']);

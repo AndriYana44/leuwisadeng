@@ -16,4 +16,14 @@ class HomeController extends Controller
             'data' => $data,
         ]);
     }
+
+    function getPosting($slug)
+    {
+        $data = Posting::where('slug', $slug)->get();
+
+        return view('landing.posting.app', [
+            'title' => 'Posting',
+            'data' => $data
+        ]);
+    }
 }

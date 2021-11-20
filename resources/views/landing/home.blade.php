@@ -49,7 +49,7 @@
                     $fullDate = $pecah[0] . ' ' . $monthName . ' ' . $pecah[2];
                 @endphp
                 <div class="card card-berita">
-                    <a href="">
+                    <a href="{{ url('') }}/posting/{{ $item->slug }}">
                     <div class="card-body" style="position: relative; display: flex; justify-content: center; align-items: center;">
                         <img src="{{ asset("file_upload/$item->image") }}" alt="gambar berita" style="width: 100%; height: 250px;">
                         <div class="judul">

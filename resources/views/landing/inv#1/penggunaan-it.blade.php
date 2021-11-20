@@ -14,7 +14,7 @@
     }
     .hierarki {
         box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
-        padding: 20px 0;
+        padding: 20px 40px;
     }
     .content {
         box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
@@ -37,8 +37,8 @@
         flex-direction: column;
     }
 </style>
-<div class="hierarki">
-    <div class="container">
+<div class="container"> 
+    <div class="hierarki">
         <h3 style="color: #555">Penggunaan IT Madurasa</h3>
         <small style="color: #999">Beranda / Penggunaan IT Madurasa</small>
     </div>
