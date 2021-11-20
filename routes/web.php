@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\HalamanController;
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\PostingController;
@@ -59,6 +60,13 @@ Route::middleware(['auth'])->group(function () {
 
             // method delete
             Route::delete('/delete/{id}', [HalamanController::class, 'destroy']);
+        });
+
+        // agenda
+        Route::prefix('agenda')->group(function() {
+            // method get
+            Route::get('/', [AgendaController::class, 'index']);
+            Route::get('/create', [AgendaController::class, 'create']);
         });
     });
 });

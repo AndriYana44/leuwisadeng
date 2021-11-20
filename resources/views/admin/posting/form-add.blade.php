@@ -18,6 +18,14 @@
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
+
+        <style>
+            .document-editor__editable-container .ck-editor__editable {
+                width: 100%;
+                min-height: 9cm;
+            }
+        </style>
+
         <!-- /.content-header -->
         <div class="content">
             <div class="container-fluid">
@@ -29,148 +37,79 @@
                                 <div class="card-header">
                                     <span>Tambah data posting</span>
                                 </div>
-                                <div class="card-body text-center" style="display: flex; justify-content:center; align-items: center;">
-                                    <table style="width: 80%;">
-                                        <tr>
-                                            <td class="lable">
-                                                <div class="form-group mb-3">
-                                                    <label for="judul">Judul Posting &emsp; </label>
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <label for="judul">Judul Posting &emsp; </label>
+                                                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" placeholder="masukan judul posting">
+                                                @error('judul')
+                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="kategori">Kategori &emsp; </label>
+                                                <input type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="masukan kategori">
+                                                @error('kategori')
+                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tanggal">Tanggal &emsp; </label>
+                                                <div class="input-group col-4">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <i class="fa fa-calendar-check"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="tanggal" id="tanggal">
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" placeholder="masukan judul posting">
-                                                    </div>
-                                                    @error('judul')
-                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                    @enderror
+                                                @error('tanggal')
+                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="gambar">Gambar Utama &emsp; </label>
+                                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                                <small class="text-danger float-left mb-3 validate_size" hidden>Ukuran file terlalu besar. (max: 1.5MB)</small>
+                                                @error('image')
+                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="konten">Konten &emsp; </label>
+                                                <div class="document-editor__editable-container">
+                                                    <textarea name="konten" id="konten" class="document-editor__editable" cols="30" rows="10"></textarea>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lable">
-                                                <div class="form-group mb-3">
-                                                    <label for="kategori">Kategori &emsp; </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="masukan kategori">
-                                                    </div>
-                                                    @error('kategori')
-                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lable">
-                                                <div class="form-group mb-3">
-                                                    <label for="tanggal">Tanggal &emsp; </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <div class="input-group col-4">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <i class="fa fa-calendar-check"></i>
-                                                        </span>
-                                                        <input type="text" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="tanggal" id="tanggal">
-                                                    </div>
-                                                    @error('tanggal')
-                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lable">
-                                                <div class="form-group mb-3">
-                                                    <label for="gambar">Gambar Utama &emsp; </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-                                                    </div>
-                                                    <small class="text-danger float-left mb-3 validate_size" hidden>Ukuran file terlalu besar. (max: 1.5MB)</small>
-                                                    @error('image')
-                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lable">
-                                                <div class="form-group mb-3">
-                                                    <label for="konten">Konten &emsp; </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <textarea name="konten" id="konten" cols="30" rows="10"></textarea>                                                    
-                                                    </div>
-                                                    @error('konten')
-                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lable">
-                                                <div class="form-group mb-3">
-                                                    <label for="kata_kunci">Kata Kunci &emsp; </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <input name="kata_kunci" id="kata_kunci" class="form-control @error('kata_kunci') is-invalid @enderror" placeholder="masukan kata kunci">
-                                                    </div>
-                                                    @error('kata_kunci')
-                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lable">
-                                                <div class="form-group">
-                                                    <label for="deskripsi">Deskripsi &emsp; </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <input name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="masukan deskripsi">
-                                                    </div>
-                                                    @error('deskripsi')
-                                                        <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <div class="form-group mt-4">
-                                                    <button type="submit" class="btn btn-primary float-right">
-                                                        <i class="fa fa-check"></i> Sumbit
-                                                    </button>
-                                                    <button type="reset" class="btn btn-warning float-right mr-2">
-                                                        <i class="fa fa-spinner"></i> Reset
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger float-right mr-2 cancel">
-                                                        <i class="fa fa-times"></i> Cancel
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                                @error('konten')
+                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="kata_kunci">Kata Kunci &emsp; </label>
+                                                <input name="kata_kunci" id="kata_kunci" class="form-control @error('kata_kunci') is-invalid @enderror" placeholder="masukan kata kunci">
+                                                @error('kata_kunci')
+                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="deskripsi">Deskripsi &emsp; </label>
+                                                <input name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="masukan deskripsi">
+                                                @error('deskripsi')
+                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group mt-4">
+                                                <button type="submit" class="btn btn-primary float-right">
+                                                    <i class="fa fa-check"></i> Sumbit
+                                                </button>
+                                                <button type="reset" class="btn btn-warning float-right mr-2">
+                                                    <i class="fa fa-spinner"></i> Reset
+                                                </button>
+                                                <button type="button" class="btn btn-danger float-right mr-2 cancel">
+                                                    <i class="fa fa-times"></i> Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -182,8 +121,6 @@
 @endsection
 @section('scripts')
     <script>
-        CKEDITOR.replace('konten');
-
         $(function() {
             $('#tanggal').datepicker();
             (function setDateValue() {
@@ -213,5 +150,124 @@
                 });
             })();
         });
+
+        // ckeditor
+        class MyUploadAdapter {
+            constructor( loader ) {
+                // The file loader instance to use during the upload.
+                this.loader = loader;
+            }
+
+            // Starts the upload process.
+            upload() {
+                return this.loader.file
+                    .then( file => new Promise( ( resolve, reject ) => {
+                        this._initRequest();
+                        this._initListeners( resolve, reject, file );
+                        this._sendRequest( file );
+                    } ) );
+            }
+
+            // Aborts the upload process.
+            abort() {
+                if ( this.xhr ) {
+                    this.xhr.abort();
+                }
+            }
+
+            // Initializes the XMLHttpRequest object using the URL passed to the constructor.
+            _initRequest() {
+                const xhr = this.xhr = new XMLHttpRequest();
+
+                // Note that your request may look different. It is up to you and your editor
+                // integration to choose the right communication channel. This example uses
+                // a POST request with JSON as a data structure but your configuration
+                // could be different.
+                xhr.open( 'POST', "{{ route('upload') }}", true );
+                xhr.setRequestHeader('x-csrf-token', '{{ csrf_token() }}');
+                xhr.responseType = 'json';
+            }
+
+            // Initializes XMLHttpRequest listeners.
+            _initListeners( resolve, reject, file ) {
+                const xhr = this.xhr;
+                const loader = this.loader;
+                const errorSize = `Ukuran file/gambar terlalu besar. (max: 1.5mb)`;
+
+                if(file.size > 1500000) {
+                    xhr.addEventListener( 'error', () => reject( errorSize ) );
+                }
+                xhr.addEventListener( 'abort', () => reject() );
+                xhr.addEventListener( 'load', () => {
+                    const response = xhr.response;
+
+                    // This example assumes the XHR server's "response" object will come with
+                    // an "error" which has its own "message" that can be passed to reject()
+                    // in the upload promise.
+                    //
+                    // Your integration may handle upload errors in a different way so make sure
+                    // it is done properly. The reject() function must be called when the upload fails.
+                    if ( !response || response.error ) {
+                        return reject( response && response.error ? response.error.message : errorSize );
+                    }
+
+                    // If the upload is successful, resolve the upload promise with an object containing
+                    // at least the "default" URL, pointing to the image on the server.
+                    // This URL will be used to display the image in the content. Learn more in the
+                    // UploadAdapter#upload documentation.
+                    resolve( {
+                        default: response.url
+                    } );
+                } );
+
+                // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
+                // properties which are used e.g. to display the upload progress bar in the editor
+                // user interface.
+                if ( xhr.upload ) {
+                    xhr.upload.addEventListener( 'progress', evt => {
+                        if ( evt.lengthComputable ) {
+                            loader.uploadTotal = evt.total;
+                            loader.uploaded = evt.loaded;
+                        }
+                    } );
+                }
+            }
+
+            // Prepares the data and sends the request.
+            _sendRequest( file ) {
+                // Prepare the form data.
+                const data = new FormData();
+
+                data.append( 'upload', file );
+
+                // Important note: This is the right place to implement security mechanisms
+                // like authentication and CSRF protection. For instance, you can use
+                // XMLHttpRequest.setRequestHeader() to set the request headers containing
+                // the CSRF token generated earlier by your application.
+
+                // Send the request.
+                this.xhr.send( data );
+            }
+        }
+
+        // ...
+
+        function MyCustomUploadAdapterPlugin( editor ) {
+            editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+                // Configure the URL to the upload script in your back-end here!
+                return new MyUploadAdapter( loader );
+            };
+        }
+
+        // ...
+
+        ClassicEditor
+            .create( document.querySelector( '#konten' ), {
+                extraPlugins: [ MyCustomUploadAdapterPlugin ],
+                // ...
+            } )
+            .catch( error => {
+                console.log( error );
+            } );
     </script>
 @endsection

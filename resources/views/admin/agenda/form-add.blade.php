@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Tambah data halaman</h1>
+                    <h1 class="m-0">Tambah data agenda</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Halaman</li>
+                    <li class="breadcrumb-item active">Agenda</li>
                     <li class="breadcrumb-item active">Create</li>
                     </ol>
                 </div><!-- /.col -->
@@ -20,25 +20,9 @@
         </div>
 
         <style>
-            .file-wrapper {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                width: 200px;
-                text-align: start;
-                margin: 10px 0;
-                background-color: #eee;
-                padding: 10px 0 10px 15px;
-                border-radius: 5px;
-                border: 1px solid rgba(0, 0, 0, .3);
-            }
-            .konten-wrapper {
+            .document-editor__editable-container .ck-editor__editable {
                 width: 100%;
-                max-width: 20cm;
-            }
-            .konten-wrapper #konten {
-                width: 80%;
-                min-height: 80px;
+                min-height: 9cm;
             }
         </style>
 
@@ -47,58 +31,39 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ url('') }}/admin/halaman/update/{{ $data->id }}" class="form-halaman" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            @method('patch')
+                        <form action="{{ url('') }}/admin/halaman/store" class="form-halaman" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="card shadow rounded pb-4">
                                 <div class="card-header">
-                                    <span>Tambah data halaman</span>
+                                    <span>Tambah data agenda</span>
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">
                                         <div class="col-8">
                                             <div class="form-group">
-                                                <label for="judul">Judul Halaman</label>
-                                                <input type="text" value="{{ $data->judul }}" class="form-control @error('judul') is-invalid @enderror" name="judul" placeholder="masukan judul posting">
-                                                @error('judul')
-                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="kategori">Konten</label>
-                                                <div class="konten-wrapper">
-                                                    <textarea id="editor" name="konten">{{ $data->konten }}</textarea>
+                                                <div class="col-12">
+                                                    <label for="judul">Judul Agenda</label>
+                                                    <input type="text" class="form-control" id="judul" placeholder="masukan judul agenda">
                                                 </div>
-                                                @error('konten')
-                                                    <small class="text-danger float-left mb-3">{{ $message }}</small>
-                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="gambar">File Lampiran</label>
-                                                <span class="file-wrapper">
-                                                    <b class="float-left">Lampiran sebelumnya:</b>  
-                                                    <a href="{{ url('') }}/admin/halaman/download/{{ $data->id }}" class="file">
-                                                        <i class="fa fa-download"></i> Lampiran.{{ $ext }}
-                                                    </a>
-                                                </span>
-                                                <div class="input-group">
-                                                    <input type="file" class="form-control lampiran @error('file') is-invalid @enderror" name="file">
+                                                <div class="col-3">
+                                                    <label for="tanggal">Tanggal</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <i class="fa fa-calendar-check"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="tanggal" id="tanggal">
+                                                    </div>
                                                 </div>
-                                                <small class="float-left mt-2 validate-file" style="color: #999">
-                                                    <i class="fa fa-info-circle"></i> 
-                                                    Silahkan masukan file lampiran berupa file pdf, images, dll
-                                                </small>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary float-right">
-                                                    <i class="fa fa-check"></i> Sumbit
-                                                </button>
-                                                <button type="reset" class="btn btn-warning float-right mr-2">
-                                                    <i class="fa fa-spinner"></i> Reset
-                                                </button>
-                                                <button type="button" class="btn btn-danger float-right mr-2 cancel">
-                                                    <i class="fa fa-times"></i> Cancel
-                                                </button>
+                                                <div class="col-12">
+                                                    <label for="judul">Konten &emsp; </label>
+                                                    <div class="document-editor__editable-container">
+                                                        <textarea name="konten" id="konten" class="document-editor__editable" cols="30" rows="10"></textarea>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -113,27 +78,10 @@
 @endsection
 @section('scripts')
     <script>
-        (function submitForm() {
-            $('.form-halaman').submit(function(e) {
-                var image_size = $('.lampiran')[0].files[0].size;
-                var image_name = $('.lampiran')[0].files[0].name;
-                var ext_allowed = ['jpg', 'jpeg', 'png', 'pdf', 'docx', 'doc'];
-                var ext = image_name.split('.');
-                var len = ext.length;
-                if(image_size > 1500000) {
-                    e.preventDefault();
-                    $('.lampiran').addClass('is-invalid');
-                    $('.validate-file').addClass('text-danger');
-                    $('.validate-file').html('Ukuran file terlalu besar. (max: 1.5mb)');
-                }
-
-                if(!ext_allowed.includes(ext[len-1])) {
-                    e.preventDefault();
-                    $('.lampiran').addClass('is-invalid');
-                    $('.validate-file').addClass('text-danger');
-                    $('.validate-file').html('Extensi file tidak valid!');
-                }
-            });
+        $('#tanggal').datepicker();
+        (function setDateValue() {
+            const date = new Date();
+            $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
         })();
 
         class MyUploadAdapter {
@@ -246,7 +194,7 @@
         // ...
 
         ClassicEditor
-            .create( document.querySelector( '#editor' ), {
+            .create( document.querySelector( '#konten' ), {
                 extraPlugins: [ MyCustomUploadAdapterPlugin ],
                 // ...
             } )
