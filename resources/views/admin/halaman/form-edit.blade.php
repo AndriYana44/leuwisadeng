@@ -114,6 +114,8 @@
 @section('scripts')
     <script>
         (function submitForm() {
+            cancel('.cancel');
+
             $('.form-halaman').submit(function(e) {
                 var image_size = $('.lampiran')[0].files[0].size;
                 var image_name = $('.lampiran')[0].files[0].name;

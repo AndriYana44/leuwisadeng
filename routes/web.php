@@ -67,6 +67,16 @@ Route::middleware(['auth'])->group(function () {
             // method get
             Route::get('/', [AgendaController::class, 'index']);
             Route::get('/create', [AgendaController::class, 'create']);
+
+            // method post
+            Route::post('/store', [AgendaController::class, 'store']);
+            Route::post('/edit/{id}', [AgendaController::class, 'edit']);
+
+            // method patch
+            Route::patch('/update/{id}', [AgendaController::class, 'update']);
+
+            // method delete
+            Route::delete('/delete/{id}', [AgendaController::class, 'destroy']);
         });
     });
 });

@@ -64,6 +64,7 @@
 <script src="{{ asset('adminLTE/dist/js/pages/dashboard3.js') }}"></script>
 <script src="{{ asset('js/admin/dataTables.min.js') }}"></script>
 <script src="{{ asset('js/admin/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('js/admin/app.js') }}"></script>
 <script>
     $(function() {
         $('.dropdown-wrapper').hide();
@@ -81,10 +82,6 @@
             $('.alert').slideUp();
           }, 3000);
         })();
-
-        $('.cancel').click(() => {
-          window.history.back();
-        });
     });
 </script>
 @yield('scripts')

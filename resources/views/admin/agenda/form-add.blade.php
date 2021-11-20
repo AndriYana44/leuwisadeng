@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ url('') }}/admin/halaman/store" class="form-halaman" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('') }}/admin/agenda/store" class="form-agenda" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card shadow rounded pb-4">
                                 <div class="card-header">
@@ -43,7 +43,7 @@
                                             <div class="form-group">
                                                 <div class="col-12">
                                                     <label for="judul">Judul Agenda</label>
-                                                    <input type="text" class="form-control" id="judul" placeholder="masukan judul agenda">
+                                                    <input type="text" name="judul" class="form-control" id="judul" placeholder="masukan judul agenda">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -65,6 +65,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group float-right">
+                                                <button type="button" class="btn btn-danger cancel">
+                                                    <i class="fa fa-times"></i> Cancel</button>
+                                                <button type="reset" class="btn btn-warning">
+                                                    <i class="fa fa-spinner"></i> Reset</button>
+                                                <button type="submit" class="btn btn-primary"> 
+                                                    <i class="fa fa-check"></i> Submit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -83,6 +91,8 @@
             const date = new Date();
             $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
         })();
+
+        cancel('.cancel');
 
         class MyUploadAdapter {
             constructor( loader ) {

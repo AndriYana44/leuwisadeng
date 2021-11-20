@@ -140,6 +140,8 @@
 @section('scripts')
     <script>
         $(function() {
+            cancel('.cancel');
+
             (function submitForm() {
                 $('.form-posting').submit(function(e) {
                     var image_size = $('.gambar')[0].files[0].size;

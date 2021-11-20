@@ -127,6 +127,8 @@
                 const date = new Date();
                 $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
             })();
+
+            cancel('.cancel');
             
             (function submitForm() {
                 $('.form-posting').submit(function(e) {

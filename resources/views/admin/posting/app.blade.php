@@ -30,7 +30,7 @@
                                 </a>
                             </div>
 
-                            @if ($message = Session::has('success'))
+                            @if ($message = Session::get('success'))
                                 <div class="alert alert-info" role="alert">
                                     {{ $message }}
                                 </div>
