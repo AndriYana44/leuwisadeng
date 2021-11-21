@@ -5,14 +5,14 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Posting extends Model
+class Kategori extends Model
 {
     use HasFactory;
-    protected $table = 'tb_posting';
+    protected $table = 'tb_kategori';
     protected $guarded = [];
 
-    function kategori()
+    function posting()
     {
-        return $this->belongsTo(Kategori::class, 'id_kategori', 'id');
+        return $this->hasOne(Posting::class, 'id_kategori');
     }
 }

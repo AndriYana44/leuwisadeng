@@ -18,6 +18,9 @@
   {{-- dataTables --}}
   <link rel="stylesheet" href="{{ asset('css/admin/dataTables.bootstrap4.css') }}">
   <link rel="stylesheet" href="{{ asset('jquery-ui/jquery-ui.css') }}">
+
+  {{-- select2 --}}
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <!--
 `body` tag options:
@@ -51,7 +54,9 @@
 <script src="{{ asset('adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('adminLTE/dist/js/adminlte.js') }}"></script>
 
-{{-- ckeditor --}}
+{{-- select2 --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 {{-- <script src="{{ asset('ckeditor-standard/content/Scripts/ckeditor/ckeditor.js') }}"></script> --}}
 {{-- <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script> --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>

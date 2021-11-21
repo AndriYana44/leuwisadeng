@@ -41,6 +41,11 @@
     }
     });
 
+    (function setTableBordered() {
+        let table = document.querySelectorAll('figure.table table');
+        table.forEach(res => res.classList.add('table', 'table-bordered'));
+    })();
+
     btn.on('click', function(e) {
     e.preventDefault();
     $('html, body').animate({scrollTop:0}, '300');

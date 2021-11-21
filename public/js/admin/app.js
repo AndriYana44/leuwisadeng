@@ -3,3 +3,7 @@ function cancel(el) {
         window.history.back();
     });
 }
+
+(function addClassTable() {
+    $('.table').parent().addClass('table-responsive');
+})();

@@ -17,44 +17,56 @@
           <li class="nav-header"><small>MENU</small></li>
           <li class="nav-item">
             <a href="{{ url('') }}/admin" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-fw fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ url('') }}/admin/kategori" class="nav-link">
+              <i class="nav-icon fas fa-fw fa-list-ol"></i>
+              <p>Kategori Posting</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('') }}/admin/posting" class="nav-link">
-              <i class="nav-icon fas fa-newspaper"></i>
+              <i class="nav-icon fas fa-fw fa-newspaper"></i>
               <p>Posting</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('') }}/admin/halaman" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>Halaman</p>
+            <a href="{{ url('') }}/admin/desa" class="nav-link">
+              <i class="nav-icon fas fa-fw fa-table"></i>
+              <p>Desa</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ url('') }}/admin/agenda" class="nav-link">
-              <i class="nav-icon fas fa-calendar-check"></i>
+              <i class="nav-icon fas fa-fw fa-calendar-check"></i>
               <p>Agenda</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-images"></i>
+              <i class="nav-icon fas fa-fw fa-images"></i>
               <p>Album</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-image"></i>
+              <i class="nav-icon fas fa-fw fa-image"></i>
               <p>Foto</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>Desa</p>
+            <a href="{{ url('') }}/admin/halaman" class="nav-link">
+              <i class="nav-icon fas fa-fw fa-copy"></i>
+              <p>Halaman</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('') }}/admin/menu" class="nav-link">
+              <i class="nav-icon fas fa-fw fa-list"></i>
+              <p>Menu Manager</p>
             </a>
           </li>
         </ul>

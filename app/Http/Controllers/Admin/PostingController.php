@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Kategori;
 use App\Models\Admin\Posting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +13,7 @@ class PostingController extends Controller
 {
     function index()
     {
-        $data = Posting::all();
+        $data = Posting::with('kategori')->get();
 
         return view('admin.posting.app', [
             'data' => $data
@@ -21,7 +22,10 @@ class PostingController extends Controller
     
     function create()
     {
-        return view('admin.posting.form-add');
+        $kategori = Kategori::all();
+        return view('admin.posting.form-add', [
+            'kategori' => $kategori,
+        ]);
     }
 
     function store(Request $request)
@@ -56,7 +60,7 @@ class PostingController extends Controller
 
         $posting = new Posting();
         $posting->judul = $request->judul;
-        $posting->kategori = $request->kategori;
+        $posting->id_kategori = $request->kategori;
         $posting->tanggal = is_array($fix_date) ? $request->tanggal : $fix_date;
         $posting->image = $file_name;
         $posting->konten = $request->konten;
@@ -73,9 +77,11 @@ class PostingController extends Controller
     function edit($id) 
     {
         $data = Posting::find($id);
+        $kategori = Kategori::all();
 
         return view('admin.posting.form-edit', [
             'data' => $data,
+            'kategori' => $kategori,
         ]);
     }
 
@@ -108,7 +114,7 @@ class PostingController extends Controller
         $slug = implode('-', $slug);
 
         $data_edit->judul = $request->judul;
-        $data_edit->kategori = $request->kategori;
+        $data_edit->id_kategori = $request->kategori;
         $data_edit->tanggal = is_array($fix_date) ? $request->tanggal : $fix_date;
         $data_edit->konten = $request->konten;
         $data_edit->kata_kunci = $request->kata_kunci;

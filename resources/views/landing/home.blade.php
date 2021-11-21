@@ -7,14 +7,12 @@
         </div>
         <div class="desa-wrapper">
             <ul>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Wangun Jaya</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Leuwisadeng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Sibanteng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Kalong Satu</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Sadeng Kolot</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Babakan Sadeng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Sadeng</a></li>
-                <li class="bg-success"><a href="" class="desa"><i class="fa fa-caret-right"></i> &nbsp; Desa Kalong Dua</a></li>
+                @foreach ($desa as $item)
+                <li class="bg-success">
+                    <a href="{{ url('') }}/desa/{{ $item->slug }}" class="desa">
+                        <i class="fa fa-caret-right"></i> &nbsp; {{ $item->desa }}</a>
+                </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -71,7 +69,7 @@
         $(function() {
             // function live search desa
             (function searchDesa() {
-                $('input[name=keyword]').keydown(function() {
+                $('input[name=keyword]').keyup(function() {
                     var key = $(this).val().toLowerCase();
                     $('.desa').each(function() {
                         var text = $(this).text().toLowerCase();

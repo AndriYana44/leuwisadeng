@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AgendaController;
+use App\Http\Controllers\Admin\DesaController;
 use App\Http\Controllers\Admin\HalamanController;
 use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PostingController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Inv1Controller;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeAdminController::class, 'index']);
     Route::prefix('admin')->group(function() {
         Route::get('/', [HomeAdminController::class, 'index']);
+
+        // kategori
+        Route::prefix('kategori')->group(function() {
+            // method get
+            Route::get('/', [KategoriController::class, 'index']);
+
+            // method posting
+            Route::post('/store', [KategoriController::class, 'store']);
+
+            // method patch
+            Route::patch('/update/{id}', [KategoriController::class, 'update']);
+
+            // method delete
+            Route::delete('/delete/{id}', [KategoriController::class, 'destroy']);
+        });
 
         // posting
         Route::prefix('posting')->group(function() {
@@ -78,6 +94,23 @@ Route::middleware(['auth'])->group(function () {
             // method delete
             Route::delete('/delete/{id}', [AgendaController::class, 'destroy']);
         });
+
+        // desa
+        Route::prefix('desa')->group(function() {
+            // method get
+            Route::get('/', [DesaController::class, 'index']);
+            Route::get('/create', [DesaController::class, 'create']);
+
+            // method post
+            Route::post('/store', [DesaController::class, 'store']);
+            Route::post('/edit/{id}', [DesaController::class, 'edit']);
+
+            // method patch
+            Route::patch('/update/{id}', [DesaController::class, 'update']);
+
+            // method delete
+            Route::delete('/delete/{id}', [DesaController::class, 'destroy']);
+        });
     });
 });
 
@@ -85,9 +118,11 @@ Route::post('/editor/upload-konten', [HalamanController::class, 'uploadKonten'])
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::prefix('posting')->group(function() {
-    Route::get('/{slug}', [HomeController::class, 'getPosting']);
-});
+// posting
+Route::get('/posting/{slug}', [HomeController::class, 'getPosting']);
+
+// desa
+Route::get('/desa/{slug}', [HomeController::class, 'getDesa']);
 
 Route::prefix('inv1')->group(function() {
     Route::get('/penggunaan-it', [Inv1Controller::class, 'penggunaanIT']);

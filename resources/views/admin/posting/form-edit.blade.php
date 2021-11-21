@@ -22,6 +22,9 @@
             width: 100%;
             min-height: 9cm;
         }
+        .select2-container--default .select2-selection--single {
+            height: 40px;
+        }
     </style>
 
     <div class="content-wrapper">
@@ -66,7 +69,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="kategori">Kategori &emsp; </label>
-                                                <input type="text" value="{{ $data->kategori }}" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="masukan kategori">
+                                                <select name="kategori" id="kategori" style="height: 45px" class="@error('kategori') is-invalid @enderror">
+                                                    <option value=""></option>
+                                                    @foreach ($kategori as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->kategori }}</option>
+                                                    @endforeach
+                                                </select>
                                                 @error('kategori')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -141,6 +149,10 @@
     <script>
         $(function() {
             cancel('.cancel');
+
+            $('#kategori').select2({
+                'width': '100%',
+            });
 
             (function submitForm() {
                 $('.form-posting').submit(function(e) {

@@ -24,6 +24,9 @@
                 width: 100%;
                 min-height: 9cm;
             }
+            .select2-container--default .select2-selection--single {
+                height: 40px;
+            }
         </style>
 
         <!-- /.content-header -->
@@ -49,7 +52,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="kategori">Kategori &emsp; </label>
-                                                <input type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="masukan kategori">
+                                                <select name="kategori" id="kategori" style="height: 45px" class="@error('kategori') is-invalid @enderror">
+                                                    <option value=""></option>
+                                                    @foreach ($kategori as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->kategori }}</option>
+                                                    @endforeach
+                                                </select>
                                                 @error('kategori')
                                                     <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                 @enderror
@@ -122,6 +130,11 @@
 @section('scripts')
     <script>
         $(function() {
+            $('#kategori').select2({
+                'width': '100%',
+                'placeholder': 'pilih kategori',
+            });
+
             $('#tanggal').datepicker();
             (function setDateValue() {
                 const date = new Date();

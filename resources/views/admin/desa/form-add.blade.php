@@ -6,68 +6,103 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Tambah data agenda</h1>
+                    <h1 class="m-0">Tambah data halaman</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Agenda</li>
+                    <li class="breadcrumb-item active">Halaman</li>
                     <li class="breadcrumb-item active">Create</li>
                     </ol>
                 </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-
-        <style>
-            .document-editor__editable-container .ck-editor__editable {
-                width: 100%;
-                min-height: 9cm;
-            }
-        </style>
-
+        
         <!-- /.content-header -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ url('') }}/admin/agenda/store" class="form-agenda" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('') }}/admin/desa/store" class="form-halaman" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card shadow rounded pb-4">
                                 <div class="card-header">
-                                    <span>Tambah data agenda</span>
+                                    <span>Tambah data halaman</span>
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">
                                         <div class="col-8">
-                                            <div class="form-group">
-                                                <div class="col-12">
-                                                    <label for="judul">Judul Agenda</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <i class="fa fa-pen fa-fw"></i>
-                                                        </span>
-                                                        <input type="text" name="judul" class="form-control" id="judul" placeholder="masukan judul agenda">
-                                                    </div>
+                                            <div class="form-group mb-4">
+                                                <label for="desa">Nama Desa</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-pen fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control @error('desa') is-invalid @enderror" name="desa" placeholder="masukan nama desa">
+                                                </div>
+                                                @error('desa')
+                                                    <small class="text-danger float-left">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="gambar_utama">Gambar Utama Desa</label>
+                                                <input type="file" class="form-control" name="gambar_utama" id="gambar_utama">
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="foto_pimpinan">Foto Pimpinan</label>
+                                                <input type="file" class="form-control" name="foto_pimpinan" id="foto_pimpinan">
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="pimpinan">Nama Pimpinan</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-pen fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control @error('pimpinan') is-invalid @enderror" name="pimpinan" placeholder="masukan nama pimpinan">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-3 d-block">
+                                                <label for="alamat">Alamat Desa</label>
+                                                <textarea name="alamat" id="alamat" cols="30" class="form-control" rows="4"></textarea>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="email">Email Desa</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-envelope fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="masukan nama email">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="col-3">
-                                                    <label for="tanggal">Tanggal</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <i class="fa fa-calendar-check fa-fw"></i>
-                                                        </span>
-                                                        <input type="text" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="tanggal" id="tanggal">
-                                                    </div>
+                                                <label for="judul">Profil Umum Desa &emsp; </label>
+                                                <div class="document-editor__editable-container">
+                                                    <textarea name="profil" id="profil" class="document-editor__editable" cols="30" rows="10"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="col-12">
-                                                    <label for="judul">Konten &emsp; </label>
-                                                    <div class="document-editor__editable-container">
-                                                        <textarea name="konten" id="konten" class="document-editor__editable" cols="30" rows="10"></textarea>
-                                                    </div>
+                                                <label for="judul">Struktur Desa &emsp; </label>
+                                                <div class="document-editor__editable-container">
+                                                    <textarea name="struktur" id="struktur" class="document-editor__editable" cols="30" rows="10"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="judul">Rencana Strategis Desa &emsp; </label>
+                                                <div class="document-editor__editable-container">
+                                                    <textarea name="rencana" id="rencana" class="document-editor__editable" cols="30" rows="10"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="judul">Demografi Desa &emsp; </label>
+                                                <div class="document-editor__editable-container">
+                                                    <textarea name="demografi" id="demografi" class="document-editor__editable" cols="30" rows="10"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="judul">Kegiatan Desa &emsp; </label>
+                                                <div class="document-editor__editable-container">
+                                                    <textarea name="kegiatan" id="kegiatan" class="document-editor__editable" cols="30" rows="10"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group float-right">
@@ -75,7 +110,7 @@
                                                     <i class="fa fa-times"></i> Cancel</button>
                                                 <button type="reset" class="btn btn-warning">
                                                     <i class="fa fa-spinner"></i> Reset</button>
-                                                <button type="submit" class="btn btn-primary"> 
+                                                <button class="btn btn-primary" type="submit">
                                                     <i class="fa fa-check"></i> Submit</button>
                                             </div>
                                         </div>
@@ -91,14 +126,7 @@
 @endsection
 @section('scripts')
     <script>
-        $('#tanggal').datepicker();
-        (function setDateValue() {
-            const date = new Date();
-            $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-        })();
-
         cancel('.cancel');
-
         class MyUploadAdapter {
             constructor( loader ) {
                 // The file loader instance to use during the upload.
@@ -207,14 +235,20 @@
         }
 
         // ...
+        function ckeditor(el) {
+            ClassicEditor
+                .create( document.querySelector(el), {
+                    extraPlugins: [ MyCustomUploadAdapterPlugin ],
+                } )
+                .catch( error => {
+                    console.log( error );
+                } );
+        }
 
-        ClassicEditor
-            .create( document.querySelector( '#konten' ), {
-                extraPlugins: [ MyCustomUploadAdapterPlugin ],
-                // ...
-            } )
-            .catch( error => {
-                console.log( error );
-            } );
+        ckeditor('#profil');
+        ckeditor('#struktur');
+        ckeditor('#rencana');
+        ckeditor('#demografi');
+        ckeditor('#kegiatan');
     </script>
 @endsection

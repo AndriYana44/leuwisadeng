@@ -34,3 +34,15 @@ td.lable {
     text-align: right;
     margin-right: 15px;
 }
+.input-group .input-group-text {
+    border-radius: 0%; 
+    background-color: #FFF;
+}
+.table {
+    overflow-x: auto;
+}
+.document-editor__editable-container .ck-editor__editable {
+    width: 100%;
+    min-height: 9cm;
+    max-height: 9cm;
+}
