@@ -117,6 +117,7 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/editor/upload-konten', [HalamanController::class, 'uploadKonten'])->name('upload');
 
 Route::get('/', [HomeController::class, 'index']);
+Route::post('/', [HomeController::class, 'index']);
 
 // posting
 Route::get('/posting/{slug}', [HomeController::class, 'getPosting']);

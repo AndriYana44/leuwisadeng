@@ -146,20 +146,24 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    width: 100%;
 }
 .part-berita .card-berita {
     width: 300px;
     height: 250px;
-    margin: 20px;
     padding: 0;
     border: none;
     transition: .3s;
     position: relative;
     display: flex;
     justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
-.part-berita .card-berita:hover {
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+.part-berita .card-berita:nth-child(-n+3){
+    margin: 20px 20px 0 20px;
+}
+.part-berita .card-berita:nth-child(n+4){
+    margin: 0 20px -10px 20px;
 }
 .part-berita .card-berita .card-body {
     position: absolute;
@@ -180,7 +184,7 @@ body {
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     width: 100%;
     padding: 10px;
-    bottom: -35px;
+    bottom: -25px;
     border: 1px solid rgba(105, 65, 65, 0.1);
     border-top: none;
 }
@@ -232,3 +236,10 @@ body {
     visibility: visible;
   }
   /* end button */
+
+  /* paginate */
+  .paginate-wrapper {
+    position:absolute; 
+    transform: translateX(0);
+    bottom: -18px;
+  }

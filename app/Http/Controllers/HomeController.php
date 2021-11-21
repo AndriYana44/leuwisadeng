@@ -8,15 +8,24 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $data = Posting::all();
+        $data = Posting::with('kategori')->paginate(6);
         $desa = Desa::all();
+        $key = null;
+
+        if($request->isMethod('POST')) {
+            $data = Posting::with('kategori')->whereHas('kategori', function($q) use ($request) {
+                $q->where('kategori', 'like', '%' . $request->keyword . '%');
+            })->paginate(6);
+            $key = $request->keyword;
+        }
 
         return view('landing.home', [
             'title' => 'Home',
             'data' => $data,
             'desa' => $desa,
+            'key' => $key,
         ]);
     }
 
