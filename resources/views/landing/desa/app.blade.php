@@ -41,7 +41,7 @@
                     <div class="card">
                         <div class="card-body d-flex justify-content-center">
                             @if (isset($item->foto_pimpinan))
-                                <img src="{{ asset('') }}img/desa/{{ $item->foto_pimpinan }}" alt="avatar">                           
+                                <img src="{{ asset('') }}img/desa/{{ $item->foto_pimpinan }}" alt="avatar" width="220">                           
                             @else
                                 <img src="{{ asset('img/avatar.jpeg') }}" alt="avatar" width="220">
                             @endif
@@ -80,15 +80,15 @@
                                 <h4 class="pt-3">Profil Desa</h4>
                                 {!! $item->profil !!}
                             @endif
-                            @if (isset($item->profil))
+                            @if (isset($item->sturktur))
                                 <h4 class="pt-3">Struktur Desa</h4>
                                 {!! $item->struktur !!}
                             @endif
-                            @if (isset($item->profil))
+                            @if (isset($item->rencana))
                                 <h4 class="pt-3">Rencana Strategis Desa</h4>
                                 {!! $item->rencana !!}
                             @endif
-                            @if (isset($item->profil))
+                            @if (isset($item->demografi))
                                 <h4 class="pt-3">Demografi Desa</h4>
                                 {!! $item->demografi !!}
                             @endif

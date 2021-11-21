@@ -32,27 +32,15 @@ class DesaController extends Controller
         // checking gambar utama
         if(isset($request->gambar_utama)) {
             $gambar_utama = $request->file('gambar_utama');
-            // get name
-            $getNameFile1 = pathinfo($gambar_utama->getClientOriginalName(), PATHINFO_FILENAME);
-            // get extension
-            $getExtFile1 = $gambar_utama->getClientOriginalExtension();
-            $fileName1 = $getNameFile1 . '-' . time() . '.' . $getExtFile1;
-            // mover to dir
-            $gambar_utama->move($base_path, $fileName1);
-
+            $fileName1 = $this->uploadImage($gambar_utama, $base_path);
+            // insert to db
             $desa->gambar_utama = $fileName1;
         }
 
         // checking foto pimpinan
         if(isset($request->foto_pimpinan)) {
             $foto_pimpinan = $request->file('foto_pimpinan');
-            // get name
-            $getNameFile2 = pathinfo($foto_pimpinan->getClientOriginalName(), PATHINFO_FILENAME);
-            // get extension
-            $getExtFile2 = $foto_pimpinan->getClientOriginalExtension();
-            $fileName2 = $getNameFile2 . '-' . time() . '.' . $getExtFile2;
-            // mover to dir
-            $foto_pimpinan->move($base_path, $fileName2);
+            $fileName2 = $this->uploadImage($foto_pimpinan, $base_path);
 
             $desa->foto_pimpinan = $fileName2;
         }
@@ -87,7 +75,60 @@ class DesaController extends Controller
 
     function update(Request $request, $id)
     {
+        $desa = Desa::find($id);
+        $base_path = 'img/desa/';
 
+        // upload gambar utama
+        if(isset($request->gambar_utama)) {
+            if(file_exists($base_path . $desa->gambar_utama)) {
+                File::delete($base_path . $desa->gambar_utama);
+            }
+            $gambar_utama = $request->file('gambar_utama');
+            $fileName = $this->uploadImage($gambar_utama, $base_path);
+            $desa->gambar_utama = $fileName;
+        }
+
+        // set slug
+        $slug = explode(' ', strtolower($request->desa));
+        $slug = implode('-', $slug);
+
+        // upload foto pimpinan
+        if(isset($request->foto_pimpinan)) {
+            if(file_exists($base_path . $desa->foto_pimpinan)) {
+                File::delete($base_path . $desa->foto_pimpinan);
+            }
+            $foto_pimpinan = $request->file('foto_pimpinan');
+            $fileName = $this->uploadImage($foto_pimpinan, $base_path);
+            $desa->foto_pimpinan = $fileName;
+        }
+
+        $desa->desa = $request->desa;
+        $desa->slug = $slug;
+        $desa->nama_pimpinan = $request->pimpinan;
+        $desa->alamat = $request->alamat;
+        $desa->email = $request->email;
+        $desa->profil = $request->profil;
+        $desa->struktur = $request->struktur;
+        $desa->rencana = $request->rencana;
+        $desa->demografi = $request->demografi;
+        $desa->kegiatan = $request->kegiatan;
+        $desa->update();
+
+        return redirect('admin/desa')->with([
+            'success' => 'Data berhasil diubah',
+        ]);
+    }
+
+    private function uploadImage($file, $path)
+    {
+        $getFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // get extension
+        $getExtFile2 = $file->getClientOriginalExtension();
+        $fileName = $getFileName . '-' . time() . '.' . $getExtFile2;
+        // mover to dir
+        $file->move($path, $fileName);
+
+        return $fileName;
     }
 
     function destroy($id)
