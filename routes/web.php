@@ -129,9 +129,15 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/delete/{type}/{id}', [MenuController::class, 'destroy']);
         });
 
+        // foto
         Route::prefix('foto')->group(function() {
             Route::get('/', [FotoController::class, 'index']);
             Route::get('/create', [FotoController::class, 'create']);
+        });
+
+        // album
+        Route::prefix('album')->group(function() {
+            // ...
         });
     });
 });
