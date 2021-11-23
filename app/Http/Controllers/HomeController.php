@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\Desa;
+use App\Models\Admin\Kategori;
 use App\Models\Admin\Posting;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,7 @@ class HomeController extends Controller
     {
         $data = Posting::with('kategori')->paginate(6);
         $desa = Desa::all();
+        $kategori = Kategori::all();
         $key = null;
 
         if($request->isMethod('POST')) {
@@ -26,6 +28,7 @@ class HomeController extends Controller
             'data' => $data,
             'desa' => $desa,
             'key' => $key,
+            'kategori' => $kategori
         ]);
     }
 
@@ -46,5 +49,13 @@ class HomeController extends Controller
             'title' => 'Desa' . $desa->first()->desa,
             'desa' => $desa,
         ]);
+    }
+
+    function getKategoriPosting($kategori)
+    {
+        $data = Posting::with(['kategori'])->whereHas('kategori', function($q) use ($kategori) {
+            $q->where('kategori', $kategori);
+        })->get();
+        return response()->json($data);
     }
 }

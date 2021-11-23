@@ -135,9 +135,153 @@
         </div>
         @endif
     </div>
+
+    <style>
+        .categori-berita {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+            width: 100%;
+        }
+        .categori-wrapper {
+            max-width: 40%;
+            position: relative;
+            min-height: 700px;
+            transition: .3s;
+            background-color: #FFF;
+            padding: 20px 0;
+        }
+        .categori-wrapper .switch-categori {
+            display: flex;
+            border-bottom: 2px solid #198754;
+            width: 100%;
+            overflow-x: auto
+        }
+        .switch-categori span {
+            list-style: none;
+            margin: 0;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0);
+            font-size: 14px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            width: max-content;
+            white-space: nowrap;
+            transition: .3s;
+        }
+        .switch-categori span.active {
+            background-color: #198754;
+            color: #FFF;
+        }
+        .switch-categori span:hover {
+            border: 1px solid rgba(0, 0, 0, .1);
+        }
+        .berita-kategori {
+            display: flex;
+
+        }
+        .berita-kategori .detail {
+            margin-left: 30px;
+        }
+        .berita-kategori .detail .date-posting {
+            color: #ccc;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .berita-kategori .detail h4 {
+            color: #198754;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 250px;
+            overflow: hidden;
+        }
+        .berita-kategori .detail p {
+            width: 250px;
+            max-height: 70px;
+            overflow: hidden;
+            white-space: normal;
+            text-overflow: ellipsis;
+        }
+        .berita-kategori .detail .konten-wrapper {
+            min-height: 80px;
+            max-height: 80px;
+            overflow: hidden;
+        }
+    </style>
+
+    <div class="categori-berita">
+        <div class="container mt-5">
+            <div class="categori-wrapper">
+                <div class="switch-categori">
+                    @foreach ($kategori as $item)
+                        <span class="kategori {{ $loop->iteration == 1 ? 'active' : '' }}" data-target="{{ $item->kategori }}">{{ $item->kategori }}</span>
+                    @endforeach
+                </div>
+                <div class="berita-kategori-wrapper">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script>
+        let kategori = `{{ $kategori->first()->kategori }}`
+        getBerita(kategori);
+
+        function getBerita(kategori) {
+            $.get(`{{ url('') }}/getKategoriPosting/${kategori}`, function(res, idx) {
+                let i = 1;
+                const __null = `<div class="alert alert-warning" role="alert">
+                                    Maaf tidak ada data untuk kategori "${kategori}" !
+                                </div>`;
+                if(res.length < 1) { $('.berita-kategori-wrapper').append(__null).hide().fadeIn(300); }
+                res.forEach(res => {
+                    if(i <= 3) {
+                        let el = `<div class="berita-kategori mt-3">
+                                    <img src="{{ asset('') }}file_upload/${res.image}" alt="" style="width: 200px;">
+                                    <div class="detail">
+                                        <span class="date-posting">Diposting pada ${res.tanggal}</span>
+                                        <h4>${res.judul}</h4>
+                                        <div class="konten-wrapper">
+                                            ${res.konten}
+                                        </div>
+                                        <a href="#" class="btn btn-outline-success btn-sm mt-3 px-3">lihat detail</a>
+                                    </div>
+                                </div>
+                                <hr>`
+
+                        $('.berita-kategori-wrapper').append(el).hide().fadeIn(300);
+                        let figure = document.querySelectorAll('figure.image');
+                        if(figure != null || figure != undefined) {
+                            figure.forEach(res => res.remove())
+                        }
+                    }
+
+                    if(i > 3) {
+                        let btn = `<button class="btn btn-success" style="width: 100%">Selengkapnya</button>`;
+                        $('.berita-kategori-wrapper').append(btn).hide().fadeIn(300);
+                    }
+
+                    i++;
+                })
+            });
+        }
+
+        (function addClassActive() {
+            const li = document.querySelectorAll('.kategori');
+            document.addEventListener('click', function(e) {
+                if(e.target.classList.contains('kategori')) {
+                    li.forEach(res => res.classList.remove('active'))
+                    e.target.classList.add('active');
+
+                    // clear berita kategori
+                    document.querySelector('.berita-kategori-wrapper').innerHTML = "";
+                    
+                    let data_target = e.target.getAttribute('data-target');
+                    getBerita(data_target);
+                }
+            });
+        })();
+
         $(function() {
             // form searching
             $('.btn-search').on('click', function() {

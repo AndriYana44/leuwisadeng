@@ -158,3 +158,6 @@ Route::prefix('landing')->group(function() {
     Route::get('/{type?}/{slug}', [Halaman::class, 'index']);
     Route::get('/{type?}/{slug}/download/{lampiran}', [Halaman::class, 'download']);
 });
+
+// api
+Route::get('/getKategoriPosting/{kategori}', [HomeController::class, 'getKategoriPosting']);
