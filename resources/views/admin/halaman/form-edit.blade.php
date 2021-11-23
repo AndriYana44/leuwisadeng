@@ -6,13 +6,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Tambah data halaman</h1>
+                    <h1 class="m-0">Edit data halaman</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
                     <li class="breadcrumb-item active">Halaman</li>
-                    <li class="breadcrumb-item active">Create</li>
+                    <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -32,14 +32,6 @@
                 border-radius: 5px;
                 border: 1px solid rgba(0, 0, 0, .3);
             }
-            .konten-wrapper {
-                width: 100%;
-                max-width: 20cm;
-            }
-            .konten-wrapper #konten {
-                width: 80%;
-                min-height: 80px;
-            }
         </style>
 
         <!-- /.content-header -->
@@ -52,7 +44,7 @@
                             @method('patch')
                             <div class="card shadow rounded pb-4">
                                 <div class="card-header">
-                                    <span>Tambah data halaman</span>
+                                    <span>Edit data halaman</span>
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">
@@ -66,7 +58,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="kategori">Konten</label>
-                                                <div class="konten-wrapper">
+                                                <div class="document-editor__editable-container">
                                                     <textarea id="editor" name="konten">{{ $data->konten }}</textarea>
                                                 </div>
                                                 @error('konten')

@@ -72,7 +72,7 @@
             <div class="search-wrapper">
                 <div class="container">
                     <input type="text" name="keyword" placeholder="Cari kategori berita .." autocomplete="off" autofocus="on">
-                    <span class="search">
+                    <span class="btn-search">
                         <i class="fa fa-search fa-fw"></i>
                     </span>
                 </div>
@@ -140,7 +140,7 @@
     <script>
         $(function() {
             // form searching
-            $('.search').on('click', function() {
+            $('.btn-search').on('click', function() {
                 $('#form-search').submit();
             });
 

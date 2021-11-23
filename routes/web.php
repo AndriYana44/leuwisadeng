@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\DesaController;
+use App\Http\Controllers\Admin\FotoController;
 use App\Http\Controllers\Admin\HalamanController;
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PostingController;
+use App\Http\Controllers\Halaman;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Inv1Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -111,6 +113,26 @@ Route::middleware(['auth'])->group(function () {
             // method delete
             Route::delete('/delete/{id}', [DesaController::class, 'destroy']);
         });
+
+        // menu manager
+        Route::prefix('menu')->group(function() {
+            // method get
+            Route::get('/', [MenuController::class, 'index']);
+            Route::get('/create', [MenuController::class, 'create']);
+
+            // method post
+            Route::post('/create/parent', [MenuController::class, 'storeParent']);
+            Route::post('/create/child', [MenuController::class, 'storeChild']);
+            Route::post('/create/single', [MenuController::class, 'storeSingle']);
+
+            // method delete
+            Route::delete('/delete/{type}/{id}', [MenuController::class, 'destroy']);
+        });
+
+        Route::prefix('foto')->group(function() {
+            Route::get('/', [FotoController::class, 'index']);
+            Route::get('/create', [FotoController::class, 'create']);
+        });
     });
 });
 
@@ -125,7 +147,8 @@ Route::get('/posting/{slug}', [HomeController::class, 'getPosting']);
 // desa
 Route::get('/desa/{slug}', [HomeController::class, 'getDesa']);
 
-Route::prefix('inv1')->group(function() {
-    Route::get('/penggunaan-it', [Inv1Controller::class, 'penggunaanIT']);
-    Route::get('/penggunaan-it/download', [Inv1Controller::class, 'getDocPenggunaanIT']);
+// get page
+Route::prefix('landing')->group(function() {
+    Route::get('/{type?}/{slug}', [Halaman::class, 'index']);
+    Route::get('/{type?}/{slug}/download/{lampiran}', [Halaman::class, 'download']);
 });
