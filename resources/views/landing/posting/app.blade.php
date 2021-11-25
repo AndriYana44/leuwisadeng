@@ -26,6 +26,8 @@
     .content .card-body figure.image {
         padding-bottom: 20px;
         border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: center;
     }
 </style>
 @foreach ($data as $item)    

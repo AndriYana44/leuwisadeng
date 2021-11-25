@@ -45,7 +45,7 @@
                                         <div class="col-8">
                                             <div class="form-group">
                                                 <label for="judul">Judul Posting &emsp; </label>
-                                                <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" placeholder="masukan judul posting">
+                                                <input type="text" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul') }}" name="judul" placeholder="masukan judul posting">
                                                 @error('judul')
                                                     <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                 @enderror
@@ -54,8 +54,8 @@
                                                 <label for="kategori">Kategori &emsp; </label>
                                                 <select name="kategori" id="kategori" style="height: 45px" class="@error('kategori') is-invalid @enderror">
                                                     <option value=""></option>
-                                                    @foreach ($kategori as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->kategori }}</option>
+                                                    @foreach ($kategori as $idx => $item)
+                                                        <option value="{{ $item->id }}" {{ old('kategori') == $item->id ? 'selected' : '' }}>{{ $item->kategori }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('kategori')
@@ -76,7 +76,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="gambar">Gambar Utama &emsp; </label>
-                                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                                <input type="file" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" name="image">
                                                 <small class="text-danger float-left mb-3 validate_size" hidden>Ukuran file terlalu besar. (max: 1.5MB)</small>
                                                 @error('image')
                                                     <small class="text-danger float-left mb-3">{{ $message }}</small>
@@ -85,7 +85,7 @@
                                             <div class="form-group">
                                                 <label for="konten">Konten &emsp; </label>
                                                 <div class="document-editor__editable-container">
-                                                    <textarea name="konten" id="konten" class="document-editor__editable" cols="30" rows="10"></textarea>
+                                                    <textarea name="konten" id="konten" class="document-editor__editable" cols="30" rows="10">{{ old('konten') }}</textarea>
                                                 </div>
                                                 @error('konten')
                                                     <small class="text-danger float-left mb-3">{{ $message }}</small>
@@ -93,14 +93,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="kata_kunci">Kata Kunci &emsp; </label>
-                                                <input name="kata_kunci" id="kata_kunci" class="form-control @error('kata_kunci') is-invalid @enderror" placeholder="masukan kata kunci">
+                                                <input name="kata_kunci" id="kata_kunci" value="{{ old('kata_kunci') }}" class="form-control @error('kata_kunci') is-invalid @enderror" placeholder="masukan kata kunci">
                                                 @error('kata_kunci')
                                                     <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="deskripsi">Deskripsi &emsp; </label>
-                                                <input name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="masukan deskripsi">
+                                                <input name="deskripsi" id="deskripsi" value="{{ old('deskripsi') }}" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="masukan deskripsi">
                                                 @error('deskripsi')
                                                     <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                 @enderror
@@ -112,9 +112,9 @@
                                                 <button type="reset" class="btn btn-warning float-right mr-2">
                                                     <i class="fa fa-spinner"></i> Reset
                                                 </button>
-                                                <button type="button" class="btn btn-danger float-right mr-2 cancel">
+                                                <a href="{{ url('admin/posting') }}" class="btn btn-danger float-right mr-2 cancel">
                                                     <i class="fa fa-times"></i> Cancel
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -140,8 +140,6 @@
                 const date = new Date();
                 $('#tanggal').val(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
             })();
-
-            cancel('.cancel');
             
             (function submitForm() {
                 $('.form-posting').submit(function(e) {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AgendaController;
+use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\Admin\DesaController;
 use App\Http\Controllers\Admin\FotoController;
 use App\Http\Controllers\Admin\HalamanController;
@@ -137,7 +138,10 @@ Route::middleware(['auth'])->group(function () {
 
         // album
         Route::prefix('album')->group(function() {
-            // ...
+            Route::get('/', [AlbumController::class, 'index']);
+            Route::post('/store', [AlbumController::class, 'store']);
+            Route::patch('/update/{id}', [AlbumController::class, 'update']);
+            Route::delete('/delete/{id}', [AlbumController::class, 'destroy']);
         });
     });
 });

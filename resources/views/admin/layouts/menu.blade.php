@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url('') }}/admin/album" class="nav-link">
               <i class="nav-icon fas fa-fw fa-images"></i>
               <p>Album</p>
             </a>

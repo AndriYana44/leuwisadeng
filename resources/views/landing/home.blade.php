@@ -200,6 +200,7 @@
             overflow: hidden;
             white-space: normal;
             text-overflow: ellipsis;
+            color: #555;
         }
         .berita-kategori .detail .konten-wrapper {
             min-height: 80px;

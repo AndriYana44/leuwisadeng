@@ -31,7 +31,7 @@ class PostingController extends Controller
     function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
+            'judul' => 'required|unique:tb_posting|string|max:255',
             'kategori' => 'required|string|max:255',
             'tanggal' => 'required',
             'image' => 'required|mimes:jpeg,jpg,png',
