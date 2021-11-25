@@ -43,7 +43,7 @@
                             @enderror
 
                             <div class="card-body">
-                                <table class="table table-bordered table-striped table-hover" id="table-foto">
+                                <table class="table table-bordered table-striped table-hover" id="table-album">
                                     <thead>
                                         <tr>
                                             <th>Judul Album</th>
@@ -152,5 +152,8 @@
 
 @section('scripts')
     <script>
+        $(function() {
+            $('#table-album').DataTable()
+        });
     </script>
 @endsection

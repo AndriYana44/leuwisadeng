@@ -34,7 +34,7 @@ class AlbumController extends Controller
     function update(Request $request, $id)
     {
         $request->validate([
-            'album' => 'required|unique:tb_album:string'
+            'album' => 'required|unique:tb_album|string'
         ]);
 
         Album::find($id)->update([
