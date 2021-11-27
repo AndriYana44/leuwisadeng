@@ -90,7 +90,7 @@
                 <h4>Berita Terkini</h4> 
                 <h5>Kecamatan Leuwisadeng</h5>
                 <small>Dapatkan berita & informasi resmi terupdate dan terpercaya seputar Kecamatan Kecamatan Leuwisadeng</small><br>
-                <a href="" class="btn btn-sm text-white mt-3 btn-selengkapnya" style="background-color: #146c43">Selengkapnya</a>
+                <a href="{{ url('') }}/berita-terkini" class="btn btn-sm text-white mt-3 btn-selengkapnya" style="background-color: #146c43">Selengkapnya</a>
             </div>
             <div class="pimpinan mt-5">
                 <span class="mb-3">Pimpinan</span>
@@ -222,6 +222,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 @section('scripts')
     <script>
@@ -257,7 +258,7 @@
                         }
                     }
 
-                    if(i > 3) {
+                    if(i == 4) {
                         let btn = `<button class="btn btn-success" style="width: 100%">Selengkapnya</button>`;
                         $('.berita-kategori-wrapper').append(btn).hide().fadeIn(300);
                     }

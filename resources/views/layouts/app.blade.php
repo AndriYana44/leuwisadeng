@@ -19,6 +19,8 @@
     </a>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
     $(document).scroll(function(e) {
         if($(document).scrollTop() >= 130)  {

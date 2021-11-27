@@ -49,7 +49,7 @@
                                             <th>Judul Album</th>
                                             <th>Tanggal dibuat</th>
                                             <th>Terakhir update</th>
-                                            <th>Aksi</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,7 +58,7 @@
                                             <td>{{ $item->album }}</td>
                                             <td>{{ $item->created_at }}</td>
                                             <td>{{ $item->updated_at }}</td>
-                                            <td>
+                                            <td class="text-center">
                                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editAlbum{{ $item->id }}">
                                                     <i class="fa fa-pen"></i>
                                                 </button>

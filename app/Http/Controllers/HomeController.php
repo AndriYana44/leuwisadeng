@@ -28,7 +28,7 @@ class HomeController extends Controller
             'data' => $data,
             'desa' => $desa,
             'key' => $key,
-            'kategori' => $kategori
+            'kategori' => $kategori,
         ]);
     }
 
