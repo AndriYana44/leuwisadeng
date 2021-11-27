@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Agenda;
 use App\Models\Admin\Desa;
 use App\Models\Admin\Kategori;
 use App\Models\Admin\Posting;
@@ -57,5 +58,31 @@ class HomeController extends Controller
             $q->where('kategori', $kategori);
         })->get();
         return response()->json($data);
+    }
+
+    function beritaTerkini()
+    {
+        $agenda = Agenda::all();
+        $data = Posting::with('kategori')->paginate(6);
+        return view('landing.berita-terkini.app', [
+            'title' => 'Berita Terkini',
+            'data' => $data,
+            'agenda' => $agenda
+        ]);
+    }
+
+    function beritaKategori($id)
+    {
+        $data = Posting::with('kategori')->whereHas('kategori', function($q) use ($id) {
+            $q->where('id', $id);
+        })->paginate(6);
+
+        $agenda = Agenda::all();
+
+        return view('landing.kategori.app', [
+            'title' => 'Posting Kategori',
+            'data' => $data,
+            'agenda' => $agenda
+        ]);
     }
 }

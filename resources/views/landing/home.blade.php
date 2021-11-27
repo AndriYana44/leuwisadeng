@@ -246,7 +246,7 @@
                                         <div class="konten-wrapper">
                                             ${res.konten}
                                         </div>
-                                        <a href="#" class="btn btn-outline-success btn-sm mt-3 px-3">lihat detail</a>
+                                        <a href="{{ url('') }}/posting/${res.slug}" class="btn btn-outline-success btn-sm mt-3 px-3">lihat detail</a>
                                     </div>
                                 </div>
                                 <hr>`
@@ -259,7 +259,7 @@
                     }
 
                     if(i == 4) {
-                        let btn = `<button class="btn btn-success" style="width: 100%">Selengkapnya</button>`;
+                        let btn = `<a href="{{ url('') }}/posting/kategori/${res.kategori.id}" class="btn btn-success" style="width: 100%">Selengkapnya</a>`;
                         $('.berita-kategori-wrapper').append(btn).hide().fadeIn(300);
                     }
 

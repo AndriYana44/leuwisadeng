@@ -153,6 +153,10 @@ Route::post('/', [HomeController::class, 'index']);
 
 // posting
 Route::get('/posting/{slug}', [HomeController::class, 'getPosting']);
+Route::get('/berita-terkini', [HomeController::class, 'beritaTerkini']);
+
+// posting kategori
+Route::get('/posting/kategori/{id}', [HomeController::class, 'beritaKategori']);
 
 // desa
 Route::get('/desa/{slug}', [HomeController::class, 'getDesa']);
