@@ -17,6 +17,7 @@ class HomeAdminController extends Controller
                 ->select(DB::raw('sum(visitor) as visitor'))
                 ->where('hour', "<", ($i < 10) ? "0" . $i . ":59:59" : $i . ":59:59")
                 ->where('hour', ">", ($i < 10) ? "0" . $i . ":00:00" : $i . ":00:00")
+                ->where('date', date('Y-m-d'))
                 ->get();
 
             $visitors[$i] = $data->first()->visitor; 

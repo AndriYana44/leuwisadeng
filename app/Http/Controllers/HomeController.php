@@ -24,12 +24,15 @@ class HomeController extends Controller
             $key = $request->keyword;
         }
 
+        $agenda = Agenda::all();
+
         return view('landing.home', [
             'title' => 'Home',
             'data' => $data,
             'desa' => $desa,
             'key' => $key,
             'kategori' => $kategori,
+            'agenda' => $agenda,
         ]);
     }
 
@@ -83,6 +86,16 @@ class HomeController extends Controller
             'title' => 'Posting Kategori',
             'data' => $data,
             'agenda' => $agenda
+        ]);
+    }
+
+    function agenda($id)
+    {
+        $agenda = Agenda::find($id);
+
+        return view('landing.agenda.app', [
+            'title' => 'Agenda',
+            'agenda' => $agenda,
         ]);
     }
 }

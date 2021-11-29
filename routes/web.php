@@ -158,6 +158,9 @@ Route::get('/berita-terkini', [HomeController::class, 'beritaTerkini']);
 // posting kategori
 Route::get('/posting/kategori/{id}', [HomeController::class, 'beritaKategori']);
 
+// agenda
+Route::post('/posting/agenda/{id}', [HomeController::class, 'agenda']);
+
 // desa
 Route::get('/desa/{slug}', [HomeController::class, 'getDesa']);
 

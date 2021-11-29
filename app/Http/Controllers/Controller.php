@@ -22,6 +22,7 @@ class Controller extends BaseController
 
         $this->os = $this->get_operating_system();
         $check = Visitors::where([['operating_sistem', $this->os], ['is_session', 1]])->get();
+
         if(!isset($_SESSION['visited'])) {
             $_SESSION['visited'] = 'yes';
             $_SESSION['created'] = time();
@@ -39,20 +40,23 @@ class Controller extends BaseController
         
         if(isset($_SESSION['created'])) {
             $time_reset = date('H:i:s');
-            $last_session = $check->first()->hour;
             $determine = explode(':', $time_reset);
+            if($determine[0] == 00) {
+                $check_in_hour_24 = Visitors::where('hour', 'like', '00%')->where('date', date('Y-m-d'))->get();
+                if(is_null($check_in_hour_24->first())) {
+                    $this->unsetVisited();
+                }
+            }
+
+            $last_session = $check->first()->hour;
             $hour_last_session = explode(':', $last_session);
             if($determine[0] > $hour_last_session[0]) {
                 $visitor = !is_null($check->first()) ? Visitors::find($check->first()->id) : new Visitors();
                 $visitor->is_session = !is_null($check->first()) ? 0 : 1;
-                $visitor->update();
-
-                session_destroy();
-                session_unset();
-                unset($_SESSION['visited']);
+                $visitor->save();
+                $this->unsetVisited();
             }
         }
-
     }
 
     protected function get_operating_system() {
@@ -85,4 +89,10 @@ class Controller extends BaseController
         return $operating_system;
     }
 
+    protected function unsetVisited()
+    {
+        session_destroy();
+        session_unset();
+        unset($_SESSION['visited']);
+    }
 }

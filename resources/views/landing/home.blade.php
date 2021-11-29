@@ -141,7 +141,12 @@
             box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
             width: 100%;
         }
+        .categori-berita .container {
+            display: flex;
+            justify-content: space-between;
+        }
         .categori-wrapper {
+            min-width: 40%;
             max-width: 40%;
             position: relative;
             min-height: 700px;
@@ -207,10 +212,25 @@
             max-height: 80px;
             overflow: hidden;
         }
+        .tweet-wrapper {
+            max-height: 800px;
+            overflow: auto;
+        }
+        .agenda-wrapper {
+            max-width: 25%;
+        }
+        .agenda-wrapper .card-agenda-wrapper {
+            max-height: 800px;
+            overflow: auto;
+        }
+        .agenda-wrapper .card_agenda .card-body {
+            max-height: 200px;
+            overflow: hidden;
+        }
     </style>
 
     <div class="categori-berita">
-        <div class="container mt-5">
+        <div class="container mt-5 py-4">
             <div class="categori-wrapper">
                 <div class="switch-categori">
                     @foreach ($kategori as $item)
@@ -218,6 +238,47 @@
                     @endforeach
                 </div>
                 <div class="berita-kategori-wrapper">
+                </div>
+            </div>
+            <div class="tweet-wrapper mt-3">
+                <a class="twitter-timeline" data-width="300" data-dnt="true" href="https://twitter.com/bogorkab?ref_src=twsrc%5Etfw">Tweets by bogorkab</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <div class="agenda-wrapper mt-3">
+                <div class="card card-agenda-wrapper">
+                    <div class="card-header text-center bg-success text-white">
+                        Agenda
+                    </div>
+                    <div class="card-body">
+                        @foreach ($agenda as $val)
+                        @php
+                            $date = $val->tanggal;
+                            $pecah = explode('-', $date);
+                            $monthNum  = $pecah[1];
+                            $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                            $monthName = $dateObj->format('F');
+        
+                            $fullDate = $pecah[0] . ' ' . $monthName . ' ' . $pecah[2];
+                        @endphp
+                        <div class="card card_agenda mt-3">
+                            <div class="card-body">
+                                <small style="font-size: 13px;">
+                                    <i class="fa fa-calendar-check"></i> &nbsp;
+                                    {{ $fullDate }}
+                                </small>
+                                <h4 class="judul text-success">{{ strtoupper($val->judul) }}</h4>
+                                <div class="konten-agenda">
+                                    {!! $val->konten !!}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <form action="{{ url('') }}/posting/agenda/{{ $val->id }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-success btn-sm">Detail Agenda</button>
+                                </form>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
