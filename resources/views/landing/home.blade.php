@@ -287,8 +287,9 @@
 @endsection
 @section('scripts')
     <script>
-        let kategori = `{{ $kategori->first()->kategori }}`
-        getBerita(kategori);
+        let kategori = `{{ !is_null($kategori->first()) ? $kategori->first()->kategori : null }}`
+
+        kategori != null ? getBerita(kategori) : false;
 
         function getBerita(kategori) {
             $.get(`{{ url('') }}/getKategoriPosting/${kategori}`, function(res, idx) {

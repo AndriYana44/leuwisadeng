@@ -48,13 +48,15 @@ class Controller extends BaseController
                 }
             }
 
-            $last_session = $check->first()->hour;
-            $hour_last_session = explode(':', $last_session);
-            if($determine[0] > $hour_last_session[0]) {
-                $visitor = !is_null($check->first()) ? Visitors::find($check->first()->id) : new Visitors();
-                $visitor->is_session = !is_null($check->first()) ? 0 : 1;
-                $visitor->save();
-                $this->unsetVisited();
+            if(!is_null($check->first())) {
+                $last_session = $check->first()->hour;
+                $hour_last_session = explode(':', $last_session);
+                if($determine[0] > $hour_last_session[0]) {
+                    $visitor = !is_null($check->first()) ? Visitors::find($check->first()->id) : new Visitors();
+                    $visitor->is_session = !is_null($check->first()) ? 0 : 1;
+                    $visitor->save();
+                    $this->unsetVisited();
+                }
             }
         }
     }
