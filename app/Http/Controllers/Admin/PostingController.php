@@ -34,7 +34,6 @@ class PostingController extends Controller
             'judul' => 'required|unique:tb_posting|string|max:255',
             'kategori' => 'required|string|max:255',
             'tanggal' => 'required',
-            'image' => 'required|mimes:jpeg,jpg,png',
             'konten' => 'required|string',
             'kata_kunci' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255'

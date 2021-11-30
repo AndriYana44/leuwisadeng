@@ -217,6 +217,7 @@
             overflow: auto;
         }
         .agenda-wrapper {
+            min-width: 25%;
             max-width: 25%;
         }
         .agenda-wrapper .card-agenda-wrapper {
@@ -249,6 +250,9 @@
                         Agenda
                     </div>
                     <div class="card-body">
+                        @if(is_null($agenda->first()))
+                            <span>Tidak ada agenda!</span>
+                        @endif
                         @foreach ($agenda as $val)
                         @php
                             $date = $val->tanggal;

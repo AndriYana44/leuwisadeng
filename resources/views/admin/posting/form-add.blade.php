@@ -77,7 +77,7 @@
                                             <div class="form-group">
                                                 <label for="gambar">Gambar Utama &emsp; </label>
                                                 <input type="file" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" name="image">
-                                                <small class="text-danger float-left mb-3 validate_size" hidden>Ukuran file terlalu besar. (max: 1.5MB)</small>
+                                                <small class="text-danger float-left mb-3 validate_size" hidden></small>
                                                 @error('image')
                                                     <small class="text-danger float-left mb-3">{{ $message }}</small>
                                                 @enderror
@@ -143,22 +143,31 @@
             
             (function submitForm() {
                 $('.form-posting').submit(function(e) {
-                    var image_size = $('input[type=file]')[0].files[0].size;
-                    var image_name = $('input[type=file]')[0].files[0].name;
-                    var ext_allowed = ['jpg', 'jpeg', 'png'];
-                    var ext = image_name.split('.');
-                    var len = ext.length;
-
-                    if(image_size > 1500000) {
+                    if($('input[type=file]')[0].files[0] == undefined) {
                         e.preventDefault();
+                        $('.validate_size').html('Gambar tidak boleh kosong!');
                         $('.validate_size').removeAttr('hidden');
                         $('input[type=file]').addClass('is-invalid');
-                    }
+                    }else {
+                        var image_size = $('input[type=file]')[0].files[0].size;
+                        var image_name = $('input[type=file]')[0].files[0].name;
+                        var ext_allowed = ['jpg', 'jpeg', 'png'];
+                        var ext = image_name.split('.');
+                        var len = ext.length;
 
-                    if(!ext_allowed.includes(ext[len-1])) {
-                        e.preventDefault();
-                        $('.validate_size').html('yang anda upload bukan gambar!');
-                        $('.validate_size').removeAttr('hidden');
+                        if(image_size > 1500000) {
+                            e.preventDefault();
+                            $('.validate_size').removeAttr('hidden');
+                            $('.validate_size').html('Ukuran file terlalu besar. (max: 1.5MB)');
+                            $('input[type=file]').addClass('is-invalid');
+                        }
+
+                        if(!ext_allowed.includes(ext[len-1])) {
+                            e.preventDefault();
+                            $('.validate_size').html('yang anda upload bukan gambar!');
+                            $('.validate_size').removeAttr('hidden');
+                            $('input[type=file]').addClass('is-invalid');
+                        }
                     }
                 });
             })();
