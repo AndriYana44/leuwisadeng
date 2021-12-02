@@ -125,6 +125,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/create/parent', [MenuController::class, 'storeParent']);
             Route::post('/create/child', [MenuController::class, 'storeChild']);
             Route::post('/create/single', [MenuController::class, 'storeSingle']);
+            Route::post('/edit/{type?}/{id}', [MenuController::class, 'edit']);
+
+            // method patch
+            Route::patch('/update/{type?}/{id}', [MenuController::class, 'update']);
 
             // method delete
             Route::delete('/delete/{type}/{id}', [MenuController::class, 'destroy']);
@@ -166,6 +170,7 @@ Route::get('/desa/{slug}', [HomeController::class, 'getDesa']);
 
 // get page
 Route::prefix('landing')->group(function() {
+    Route::get('/page/berita-terkini', [HomeController::class, 'beritaTerkini']);
     Route::get('/{type?}/{slug}', [Halaman::class, 'index']);
     Route::get('/{type?}/{slug}/download/{lampiran}', [Halaman::class, 'download']);
 });

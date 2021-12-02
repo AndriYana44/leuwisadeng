@@ -100,7 +100,7 @@
                                                                 <i class="fa fa-trash"></i>
                                                             </button>
                                                         </form>
-                                                        <form action="{{ url('') }}/admin/menu/edit/{{ $item->id }}" method="POST" class="d-inline">
+                                                        <form action="{{ url('') }}/admin/menu/edit/{{ $item->is_single > 0 ? 'single' : 'parent' }}/{{ $item->id }}" method="POST" class="d-inline">
                                                             @csrf
                                                             <button type="submit" class="btn btn-warning btn-sm">
                                                                 <i class="fa fa-pen"></i>

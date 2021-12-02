@@ -75,6 +75,35 @@ class MenuController extends Controller
         ]);
     }
 
+    function edit($type, $id)
+    {
+        $type == 'child' ? $data = Menu::find($id) : $data = MenuParent::find($id);
+        $halaman = Halaman::all();
+        $parent = MenuParent::all();
+
+        return view('admin.menu.form-edit', [
+            'data' => $data,
+            'parent' => $parent,
+            'halaman' => $halaman,
+            'type' => $type
+        ]);
+    }
+
+    function update(Request $request, $type, $id)
+    {
+        $type == 'child' ? $data = Menu::find($id) : $data = MenuParent::find($id);
+        $data->name = $request->menu;
+        if($type == 'child' || $type == 'single') { $data->url = $request->url; }
+        if($type == 'child') { $data->id_parent = $request->parent; }
+        if($type == 'child' || $type == 'single') { $data->id_halaman = $request->halaman; }
+        if($type == 'parent' || $type == 'single') { $data->urutan = $request->urutan; }
+        $data->update();
+
+        return redirect('admin/menu')->with([
+            'success' => 'Data berhasil diubah',
+        ]);
+    }
+
     function destroy($type, $id)
     {
         if($type == 'parent') {
