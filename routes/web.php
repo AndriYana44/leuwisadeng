@@ -137,7 +137,7 @@ Route::middleware(['auth'])->group(function () {
         // foto
         Route::prefix('foto')->group(function() {
             Route::get('/', [FotoController::class, 'index']);
-            Route::get('/create', [FotoController::class, 'create']);
+            // Route::get('/create', [FotoController::class, 'create']);
         });
 
         // album

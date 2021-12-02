@@ -25,7 +25,7 @@
                         <div class="card shadow rounded">
                             <div class="card-header">
                                 <span>Pengelolaan Data Galeri</span>
-                                <a type="submit" href="{{ url('admin/halaman/create') }}" class="float-right btn btn-success btn-sm">
+                                <a href="{{ url('admin/foto/create') }}" class="float-right btn btn-success btn-sm">
                                     <i class="fa fa-plus"></i> Tambah
                                 </a>
                             </div>
